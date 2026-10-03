@@ -1,0 +1,89 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_opgxzc7u",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p docs && tar czf backup.tar.gz docs"
+     }
+    }
+   },
+   {
+    "id": "call_f1l3ia4y",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l backup.tar.gz"
+     }
+    }
+   },
+   {
+    "id": "call_cggi42bv",
+    "function": {
+     "index": 2,
+     "name": "bash",
+     "arguments": {
+      "command": "gunzip -c backup.tar.gz | tar xvf - docs"
+     }
+    }
+   },
+   {
+    "id": "call_v8cquf7z",
+    "function": {
+     "index": 3,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l docs"
+     }
+    }
+   }
+  ],
+  "model_s": 5.343
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p docs && tar czf backup.tar.gz docs",
+  "exit_code": 0,
+  "tool_s": 0.007,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l backup.tar.gz",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "-rw-rw-r-- 1 rahul rahul 236 Oct  3 12:58 backup.tar.gz\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "gunzip -c backup.tar.gz | tar xvf - docs",
+  "exit_code": 0,
+  "tool_s": 0.014,
+  "output": "docs/\ndocs/guide/\ndocs/guide/faq.md\ndocs/guide/setup.md\ndocs/intro.md\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l docs",
+  "exit_code": 0,
+  "tool_s": 0.007,
+  "output": "total 8\ndrwxrwxr-x 2 rahul rahul 4096 Oct  3 09:07 guide\n-rw-rw-r-- 1 rahul rahul    8 Oct  3 09:07 intro.md\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 1.49
+ }
+]

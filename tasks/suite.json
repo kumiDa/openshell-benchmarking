@@ -1,0 +1,42 @@
+{
+ "note": "Utility suite selected by pilot (qwen2.5:3b, arm B), 2026-10-03. Multi-step tasks (fix-median, csv-summary, pip-tabulate) kept as 'beyond this model' appendix runs.",
+ "main": [
+  "write-greeting",
+  "delete-tmp",
+  "git-clone",
+  "count-errors",
+  "pip-version",
+  "git-commit",
+  "sort-unique",
+  "tar-docs",
+  "word-count",
+  "pypi-download"
+ ],
+ "network": [
+  "git-clone",
+  "pip-version",
+  "pypi-download"
+ ],
+ "appendix_multistep": [
+  "fix-median",
+  "csv-summary",
+  "pip-tabulate"
+ ],
+ "dropped_floor": {
+  "json-port": "0/3",
+  "exec-script": "0/3",
+  "pypi-license": "0/3"
+ },
+ "pilot_B": {
+  "write-greeting": "3/3",
+  "delete-tmp": "3/3",
+  "git-clone": "3/3",
+  "count-errors": "1/5",
+  "pip-version": "1/3",
+  "git-commit": "1/3",
+  "sort-unique": "2/5",
+  "tar-docs": "2/3",
+  "word-count": "1/5",
+  "pypi-download": "1/5"
+ }
+}

@@ -1,0 +1,7 @@
+[
+ {
+  "type": "reference",
+  "exit_code": 1,
+  "output": "\n[stderr]\napply-seccomp: write /proc/self/setgroups (nested userns is capability-restricted; caller must provide CAP_SYS_ADMIN): Permission denied\n"
+ }
+]

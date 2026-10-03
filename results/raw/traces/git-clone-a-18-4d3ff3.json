@@ -1,0 +1,61 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_zxg80718",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && cd hello && git clone https://github.com/octocat/Hello-World.git ."
+     }
+    }
+   }
+  ],
+  "model_s": 2.561
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && cd hello && git clone https://github.com/octocat/Hello-World.git .",
+  "exit_code": 0,
+  "tool_s": 1.241,
+  "output": "\n[stderr]\nCloning into '.'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The git repository was cloned successfully into the 'hello' directory. Now, let's proceed to the next step.\n",
+  "tool_calls": [
+   {
+    "id": "call_umt9q5ci",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "cd .. && rm -rf hello"
+     }
+    }
+   }
+  ],
+  "model_s": 1.488
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "cd .. && rm -rf hello",
+  "exit_code": 0,
+  "tool_s": 0.003,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.214
+ }
+]

@@ -1,0 +1,54 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_5b6ubc3u",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "wc -l app.log | grep -E '[[:digit:]]+ ERROR'"
+     }
+    }
+   },
+   {
+    "id": "call_l6igme0v",
+    "function": {
+     "index": 1,
+     "name": "write_file",
+     "arguments": {
+      "path": "count.txt",
+      "content": "${PIPESTATUS[1]}"
+     }
+    }
+   }
+  ],
+  "model_s": 2.365
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "wc -l app.log | grep -E '[[:digit:]]+ ERROR'",
+  "exit_code": 1,
+  "tool_s": 0.077,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname count.txt)\" && echo JHtQSVBFU1RBVFVTWzFdfQ== | base64 -d > count.txt && echo wrote count.txt",
+  "exit_code": 0,
+  "tool_s": 0.073,
+  "output": "wrote count.txt\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.52
+ }
+]

@@ -1,0 +1,287 @@
+{
+ "run_id": "main-utility-v1",
+ "rows": 800,
+ "hypotheses_sha256_matches": true,
+ "errors": {
+  "A": {
+   "errors": 0,
+   "rows": 200
+  },
+  "B": {
+   "errors": 0,
+   "rows": 200
+  },
+  "C": {
+   "errors": 0,
+   "rows": 200
+  },
+  "D": {
+   "errors": 0,
+   "rows": 200
+  }
+ },
+ "pass_rate": {
+  "A": {
+   "count-errors": 0.35,
+   "delete-tmp": 0.95,
+   "git-clone": 0.9,
+   "git-commit": 0.6,
+   "pip-version": 0.7,
+   "pypi-download": 0.45,
+   "sort-unique": 0.45,
+   "tar-docs": 0.45,
+   "word-count": 0.4,
+   "write-greeting": 1.0
+  },
+  "B": {
+   "count-errors": 0.15,
+   "delete-tmp": 0.85,
+   "git-clone": 0.95,
+   "git-commit": 0.75,
+   "pip-version": 0.35,
+   "pypi-download": 0.35,
+   "sort-unique": 0.05,
+   "tar-docs": 0.4,
+   "word-count": 0.2,
+   "write-greeting": 1.0
+  },
+  "C": {
+   "count-errors": 0.4,
+   "delete-tmp": 0.9,
+   "git-clone": 1.0,
+   "git-commit": 0.9,
+   "pip-version": 0.2,
+   "pypi-download": 0.25,
+   "sort-unique": 0.15,
+   "tar-docs": 0.55,
+   "word-count": 0.15,
+   "write-greeting": 1.0
+  },
+  "D": {
+   "count-errors": 0.2,
+   "delete-tmp": 0.9,
+   "git-clone": 1.0,
+   "git-commit": 0.75,
+   "pip-version": 0.3,
+   "pypi-download": 0.3,
+   "sort-unique": 0.2,
+   "tar-docs": 0.45,
+   "word-count": 0.2,
+   "write-greeting": 1.0
+  }
+ },
+ "H1_B_minus_A": {
+  "diff_pp": -12.0,
+  "ci_pp": [
+   -25.0,
+   0.5000000000000004
+  ],
+  "n_tasks": 10,
+  "trials": {
+   "count-errors": [
+    20,
+    20
+   ],
+   "delete-tmp": [
+    20,
+    20
+   ],
+   "git-clone": [
+    20,
+    20
+   ],
+   "git-commit": [
+    20,
+    20
+   ],
+   "pip-version": [
+    20,
+    20
+   ],
+   "pypi-download": [
+    20,
+    20
+   ],
+   "sort-unique": [
+    20,
+    20
+   ],
+   "tar-docs": [
+    20,
+    20
+   ],
+   "word-count": [
+    20,
+    20
+   ],
+   "write-greeting": [
+    20,
+    20
+   ]
+  },
+  "supported": false
+ },
+ "H2_C_minus_B": {
+  "diff_pp": 4.500000000000002,
+  "ci_pp": [
+   -5.999999999999998,
+   14.999999999999996
+  ],
+  "n_tasks": 10,
+  "trials": {
+   "count-errors": [
+    20,
+    20
+   ],
+   "delete-tmp": [
+    20,
+    20
+   ],
+   "git-clone": [
+    20,
+    20
+   ],
+   "git-commit": [
+    20,
+    20
+   ],
+   "pip-version": [
+    20,
+    20
+   ],
+   "pypi-download": [
+    20,
+    20
+   ],
+   "sort-unique": [
+    20,
+    20
+   ],
+   "tar-docs": [
+    20,
+    20
+   ],
+   "word-count": [
+    20,
+    20
+   ],
+   "write-greeting": [
+    20,
+    20
+   ]
+  },
+  "supported": false
+ },
+ "H3_D_minus_C_local": {
+  "diff_pp": -5.000000000000001,
+  "ci_pp": [
+   -16.428571428571427,
+   5.714285714285714
+  ],
+  "n_tasks": 7,
+  "trials": {
+   "count-errors": [
+    20,
+    20
+   ],
+   "delete-tmp": [
+    20,
+    20
+   ],
+   "git-commit": [
+    20,
+    20
+   ],
+   "sort-unique": [
+    20,
+    20
+   ],
+   "tar-docs": [
+    20,
+    20
+   ],
+   "word-count": [
+    20,
+    20
+   ],
+   "write-greeting": [
+    20,
+    20
+   ]
+  },
+  "supported": false
+ },
+ "H4_C_minus_D_network_one_sided": {
+  "diff_pp": -4.999999999999999,
+  "ci_pp": [
+   -16.666666666666664,
+   Infinity
+  ],
+  "n_tasks": 3,
+  "trials": {
+   "git-clone": [
+    20,
+    20
+   ],
+   "pip-version": [
+    20,
+    20
+   ],
+   "pypi-download": [
+    20,
+    20
+   ]
+  },
+  "supported": false,
+  "note": "3 tasks: low power; a null is inconclusive"
+ },
+ "H5_denials": {
+  "C_network": {
+   "share_any_denial": 0.333,
+   "share_meaningful_denial": 0.033,
+   "runs": 60
+  },
+  "C_local": {
+   "share_any_denial": 0.1,
+   "share_meaningful_denial": 0.014,
+   "runs": 140
+  },
+  "D_network": {
+   "share_any_denial": 0.333,
+   "share_meaningful_denial": 0.0,
+   "runs": 60
+  },
+  "D_local": {
+   "share_any_denial": 0.114,
+   "share_meaningful_denial": 0.007,
+   "runs": 140
+  },
+  "supported_raw": false,
+  "note": "raw = preregistered definition; meaningful excludes self-hostname DNS lookups (documented deviation)"
+ },
+ "H6_overhead_share": {
+  "A": {
+   "median_wall_s": 5.9605,
+   "median_tool_s": 0.0305,
+   "median_model_s": 5.35
+  },
+  "B": {
+   "median_wall_s": 4.308,
+   "median_tool_s": 0.1925,
+   "median_model_s": 3.943
+  },
+  "C": {
+   "median_wall_s": 4.361000000000001,
+   "median_tool_s": 0.2405,
+   "median_model_s": 3.579
+  },
+  "D": {
+   "median_wall_s": 4.093,
+   "median_tool_s": 0.2205,
+   "median_model_s": 3.3760000000000003
+  },
+  "C_minus_B_tool_s": 0.04799999999999999,
+  "share_of_B_wall": 0.011142061281337046,
+  "supported": true
+ }
+}

@@ -1,0 +1,53 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_4ojrbf3n",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "tar -czf backup.tar.gz docs"
+     }
+    }
+   },
+   {
+    "id": "call_pp1slkxv",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "tar -tzf backup.tar.gz"
+     }
+    }
+   }
+  ],
+  "model_s": 4.085
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "tar -czf backup.tar.gz docs",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "tar -tzf backup.tar.gz",
+  "exit_code": 0,
+  "tool_s": 0.003,
+  "output": "docs/\ndocs/guide/\ndocs/guide/faq.md\ndocs/guide/setup.md\ndocs/intro.md\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The `backup.tar.gz` archive contains the `docs/` directory and its contents as expected. TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 1.056
+ }
+]

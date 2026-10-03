@@ -1,0 +1,35 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_srkspxj7",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "tar czf backup.tar.gz docs"
+     }
+    }
+   }
+  ],
+  "model_s": 3.145
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "tar czf backup.tar.gz docs",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The `docs/` directory was successfully archived into `backup.tar.gz`.\nTASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.591
+ }
+]

@@ -1,0 +1,61 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_2cmbf7zr",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello"
+     }
+    }
+   }
+  ],
+  "model_s": 1.052
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello",
+  "exit_code": 0,
+  "tool_s": 1.261,
+  "output": "\n[stderr]\nCloning into 'hello'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The repository has been cloned into the 'hello' directory inside the working directory.\n",
+  "tool_calls": [
+   {
+    "id": "call_9qcvep8o",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "cd hello && git checkout -f"
+     }
+    }
+   }
+  ],
+  "model_s": 1.255
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "cd hello && git checkout -f",
+  "exit_code": 0,
+  "tool_s": 0.055,
+  "output": "Your branch is up to date with 'origin/master'.\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.265
+ }
+]

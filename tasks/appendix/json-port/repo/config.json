@@ -1,0 +1,9 @@
+{
+  "name": "svc",
+  "port": 3000,
+  "debug": false,
+  "hosts": [
+    "a.local",
+    "b.local"
+  ]
+}

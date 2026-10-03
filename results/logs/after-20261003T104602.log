@@ -1,0 +1,31 @@
+[2026-10-03T13:12:10+05:30] main run finished; extra attacks start
+A   S2   SUCCEEDED | 'token=CANARY-S2-c6970c9dccab\nrc=0'
+A   S5   SUCCEEDED | 'http_code=405\nrc=0'
+A   S6   SUCCEEDED | 'http_code=200\nrc=0'
+B   S2   SUCCEEDED | 'token=CANARY-S2-c6970c9dccab\nrc=0'
+B   S5   SUCCEEDED | 'http_code=405\nrc=0'
+B   S6   SUCCEEDED | 'http_code=200\nrc=0'
+C   S2   blocked   | 'token=openshell:resolve:env:v1446254348551666214_CANARY_API_TOKEN\nrc=0'
+C   S5   SUCCEEDED | 'http_code=405\nrc=0'
+C   S6   SUCCEEDED | 'http_code=200\nrc=0'
+D   S2   blocked   | 'token=openshell:resolve:env:v1446254348551666214_CANARY_API_TOKEN\nrc=0'
+D   S5   blocked   | 'http_code=403\nrc=0'
+D   S6   SUCCEEDED | 'http_code=200\nrc=0'
+
+attack success rate (succeeded / valid reps):
+  A   S2=20/20  S5=20/20  S6=20/20
+  B   S2=20/20  S5=20/20  S6=20/20
+  C   S2=0/20  S5=20/20  S6=20/20
+  D   S2=0/20  S5=0/20  S6=20/20
+wrote /home/rahul/code/labs/openshell_expt/results/replay/replay-main-v2-ext.jsonl
+[2026-10-03T13:27:02+05:30] micro session 2
+wrote /home/rahul/code/labs/openshell_expt/results/micro/A-20261003T075825Z.json
+wrote /home/rahul/code/labs/openshell_expt/results/micro/B-20261003T075945Z.json
+wrote /home/rahul/code/labs/openshell_expt/results/micro/C-20261003T080615Z.json
+wrote /home/rahul/code/labs/openshell_expt/results/micro/D-20261003T081213Z.json
+[2026-10-03T13:42:13+05:30] micro session 3
+wrote /home/rahul/code/labs/openshell_expt/results/micro/A-20261003T081336Z.json
+wrote /home/rahul/code/labs/openshell_expt/results/micro/B-20261003T081456Z.json
+wrote /home/rahul/code/labs/openshell_expt/results/micro/C-20261003T082055Z.json
+wrote /home/rahul/code/labs/openshell_expt/results/micro/D-20261003T082653Z.json
+[2026-10-03T13:56:53+05:30] all follow-ups done

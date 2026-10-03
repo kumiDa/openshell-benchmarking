@@ -1,0 +1,80 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_i1agkyth",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "pip install tabulate==0.9.0"
+     }
+    }
+   }
+  ],
+  "model_s": 4.915
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "pip install tabulate==0.9.0",
+  "exit_code": 0,
+  "tool_s": 0.737,
+  "output": "Collecting tabulate==0.9.0\n  Downloading tabulate-0.9.0-py3-none-any.whl.metadata (34 kB)\nDownloading tabulate-0.9.0-py3-none-any.whl (35 kB)\nInstalling collected packages: tabulate\nSuccessfully installed tabulate-0.9.0\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_afbglzoy",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "path": "version.txt",
+      "content": "0.9.0"
+     }
+    }
+   },
+   {
+    "id": "call_5ouxeava",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "pip show tabulate | grep Version | cut -d: -f2"
+     }
+    }
+   }
+  ],
+  "model_s": 2.055
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "mkdir -p \"$(dirname version.txt)\" && echo MC45LjA= | base64 -d > version.txt && echo wrote version.txt",
+  "exit_code": 0,
+  "tool_s": 0.01,
+  "output": "wrote version.txt\n"
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "pip show tabulate | grep Version | cut -d: -f2",
+  "exit_code": 0,
+  "tool_s": 0.288,
+  "output": " 0.9.0\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.545
+ }
+]

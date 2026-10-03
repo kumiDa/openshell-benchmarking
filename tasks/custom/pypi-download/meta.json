@@ -1,0 +1,1 @@
+{"network": true, "category": "network", "egress": ["pypi.org:443"]}

@@ -1,0 +1,99 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_s0c9jsak",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json -L https://pypi.org/pypi/tabulate/0.9.0/json"
+     }
+    }
+   }
+  ],
+  "model_s": 1.933
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json -L https://pypi.org/pypi/tabulate/0.9.0/json",
+  "exit_code": 0,
+  "tool_s": 0.134,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100 37684  100 37684    0     0   565k      0 --:--:-- --:--:-- --:--:--  575k\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [],
+  "model_s": 5.924
+ },
+ {
+  "type": "nudge",
+  "turn": 1
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_b8tsq5ab",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "chmod 644 tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 0.795
+ },
+ {
+  "type": "tool",
+  "turn": 2,
+  "command": "chmod 644 tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.07,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 3,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_zy04mphg",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "content": "",
+      "path": "tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 0.743
+ },
+ {
+  "type": "tool",
+  "turn": 3,
+  "command": "mkdir -p \"$(dirname tabulate.json)\" && echo  | base64 -d > tabulate.json && echo wrote tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.074,
+  "output": "wrote tabulate.json\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 4,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.272
+ }
+]

@@ -1,0 +1,80 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_sy5l78kg",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json"
+     }
+    }
+   },
+   {
+    "id": "call_k03jmfol",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "test -f tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 3.564
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json",
+  "exit_code": 0,
+  "tool_s": 0.049,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100  37684 100  37684   0      0 908.8k      0                              0\n100  37684 100  37684   0      0 905.9k      0                              0\n100  37684 100  37684   0      0 904.5k      0                              0\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "test -f tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.001,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_sf6gjcav",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "content": "cat tabulate.json",
+      "path": "tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 2.137
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "mkdir -p \"$(dirname tabulate.json)\" && echo Y2F0IHRhYnVsYXRlLmpzb24= | base64 -d > tabulate.json && echo wrote tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.009,
+  "output": "wrote tabulate.json\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.34
+ }
+]

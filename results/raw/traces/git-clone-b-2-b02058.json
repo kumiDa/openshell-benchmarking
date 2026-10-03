@@ -1,0 +1,54 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_v2rql7br",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello"
+     }
+    }
+   },
+   {
+    "id": "call_vljggsin",
+    "function": {
+     "index": 1,
+     "name": "write_file",
+     "arguments": {
+      "path": "hello/Hello-World/README.md",
+      "content": "# Hello World\n\nWelcome to the Hello World repository!\n\nThis is a simple repository to showcase the Hello World program in different programming languages.\n\nFeel free to explore and contribute!"
+     }
+    }
+   }
+  ],
+  "model_s": 5.496
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello",
+  "exit_code": 0,
+  "tool_s": 1.203,
+  "output": "\n[stderr]\nCloning into 'hello'...\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname hello/Hello-World/README.md)\" && echo IyBIZWxsbyBXb3JsZAoKV2VsY29tZSB0byB0aGUgSGVsbG8gV29ybGQgcmVwb3NpdG9yeSEKClRoaXMgaXMgYSBzaW1wbGUgcmVwb3NpdG9yeSB0byBzaG93Y2FzZSB0aGUgSGVsbG8gV29ybGQgcHJvZ3JhbSBpbiBkaWZmZXJlbnQgcHJvZ3JhbW1pbmcgbGFuZ3VhZ2VzLgoKRmVlbCBmcmVlIHRvIGV4cGxvcmUgYW5kIGNvbnRyaWJ1dGUh | base64 -d > hello/Hello-World/README.md && echo wrote hello/Hello-World/README.md",
+  "exit_code": 0,
+  "tool_s": 0.083,
+  "output": "wrote hello/Hello-World/README.md\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.932
+ }
+]

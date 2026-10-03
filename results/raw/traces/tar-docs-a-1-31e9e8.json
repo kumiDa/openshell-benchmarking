@@ -1,0 +1,53 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_3amvajiy",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "tar -czvf backup.tar.gz docs"
+     }
+    }
+   },
+   {
+    "id": "call_ku4k0dzl",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l backup.tar.gz"
+     }
+    }
+   }
+  ],
+  "model_s": 3.432
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "tar -czvf backup.tar.gz docs",
+  "exit_code": 0,
+  "tool_s": 0.006,
+  "output": "docs/\ndocs/guide/\ndocs/guide/faq.md\ndocs/guide/setup.md\ndocs/intro.md\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l backup.tar.gz",
+  "exit_code": 0,
+  "tool_s": 0.006,
+  "output": "-rw-rw-r-- 1 rahul rahul 236 Oct  3 13:03 backup.tar.gz\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The archive `backup.tar.gz` has been created successfully and contains the `docs/` directory.\nTASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 1.225
+ }
+]

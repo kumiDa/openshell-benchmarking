@@ -1,0 +1,61 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_tdj6wwb7",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello"
+     }
+    }
+   }
+  ],
+  "model_s": 2.612
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello",
+  "exit_code": 0,
+  "tool_s": 1.143,
+  "output": "\n[stderr]\nCloning into 'hello'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The repository was successfully cloned into the `hello` directory within the working directory. Next step is to verify the contents of the cloned repository.\n",
+  "tool_calls": [
+   {
+    "id": "call_hym249b1",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l hello"
+     }
+    }
+   }
+  ],
+  "model_s": 1.488
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "ls -l hello",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "total 4\n-rw-rw-r-- 1 rahul rahul 13 Oct  3 11:17 README\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE\n",
+  "tool_calls": [],
+  "model_s": 0.363
+ }
+]

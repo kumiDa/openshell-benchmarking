@@ -1,0 +1,98 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_0k9coi0a",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "wc -l app.log | grep -w 'ERROR'"
+     }
+    }
+   }
+  ],
+  "model_s": 2.157
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "wc -l app.log | grep -w 'ERROR'",
+  "exit_code": 1,
+  "tool_s": 0.065,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The previous command returned an error. Let's retry by counting lines in `app.log` containing the word 'ERROR' and write the count to `count.txt`.\n",
+  "tool_calls": [
+   {
+    "id": "call_oxjg3wo9",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "grep -w 'ERROR' app.log | wc -l > count.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 1.713
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "grep -w 'ERROR' app.log | wc -l > count.txt",
+  "exit_code": 0,
+  "tool_s": 0.072,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "",
+  "tool_calls": [],
+  "model_s": 0.154
+ },
+ {
+  "type": "nudge",
+  "turn": 2
+ },
+ {
+  "type": "assistant",
+  "turn": 3,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_73mcnvb8",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "grep -w 'ERROR' app.log | wc -l > count.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 0.947
+ },
+ {
+  "type": "tool",
+  "turn": 3,
+  "command": "grep -w 'ERROR' app.log | wc -l > count.txt",
+  "exit_code": 0,
+  "tool_s": 0.067,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 4,
+  "content": "The command to write the count of lines containing 'ERROR' in `app.log` to `count.txt` was successful.\n\nTASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.823
+ }
+]

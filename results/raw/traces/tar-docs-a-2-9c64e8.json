@@ -1,0 +1,53 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_jmqlxk9f",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "cd docs && tar -czf ../backup.tar.gz ."
+     }
+    }
+   },
+   {
+    "id": "call_gmjd0ajw",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l"
+     }
+    }
+   }
+  ],
+  "model_s": 4.255
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "cd docs && tar -czf ../backup.tar.gz .",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "total 8\n-rw-rw-r-- 1 rahul rahul  232 Oct  3 11:32 backup.tar.gz\ndrwxrwxr-x 3 rahul rahul 4096 Oct  3 09:07 docs\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.749
+ }
+]

@@ -1,0 +1,470 @@
+<title>OpenShell vs Plain Shell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one reading column (~66ch) for prose; figures, tables and code break out wider. Surfaces
+   match the figure backgrounds so charts sit flush on the page in both themes. */
+:root {
+  --bg: #fcfcfb;          /* = figure surface (light) */
+  --fg: #16181d;
+  --muted: #565a63;
+  --rule: #e2e3e6;
+  --panel: #f2f4f7;
+  --accent: #1c5cab;      /* ramp step used for "OpenShell, permissive" in the figures */
+  --accent-soft: #e3ecf8;
+  --font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --show-light: block;
+  --show-dark: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a1a19; --fg: #ecebe6; --muted: #aeada5; --rule: #34342f; --panel: #232321;
+    --accent: #6da7ec; --accent-soft: #22324a; --show-light: none; --show-dark: block; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a1a19; --fg: #ecebe6; --muted: #aeada5; --rule: #34342f; --panel: #232321;
+  --accent: #6da7ec; --accent-soft: #22324a; --show-light: none; --show-dark: block; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font: 18px/1.65 var(--font-body); }
+.page { max-width: 1000px; margin: 0 auto; padding-inline: 20px; padding-block: 48px 96px; }
+.col, .page > article > :is(p, ul, ol, h2, h3, blockquote) { max-width: 66ch; margin-inline: auto; }
+header.masthead { max-width: 66ch; margin: 0 auto 40px; display: grid; gap: 14px; }
+.kicker { font: 600 12px/1.2 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+h1 { font: 800 clamp(30px, 5.2vw, 46px)/1.08 var(--font-display); font-stretch: 85%; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
+.dek { font-size: 20px; color: var(--muted); margin: 0; }
+.meta { font: 13px/1.5 var(--font-mono); color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; border-top: 1px solid var(--rule); padding-top: 12px; }
+.glance { max-width: 66ch; margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;
+  border-block: 1px solid var(--rule); }
+.glance div { padding: 16px 14px 16px 0; min-width: 0; }
+.glance div + div { padding-left: 14px; border-left: 1px solid var(--rule); }
+.glance b { display: block; font: 800 30px/1.1 var(--font-display); font-stretch: 80%; font-variant-numeric: tabular-nums; color: var(--accent); }
+.glance span { font: 14px/1.4 var(--font-display); color: var(--muted); }
+article h2 { font: 700 26px/1.2 var(--font-display); font-stretch: 90%; margin-top: 2.4em; margin-bottom: .5em; text-wrap: balance; }
+article h3 { font: 700 19px/1.3 var(--font-display); margin-top: 1.8em; }
+article p, article li { hyphens: auto; }
+article ul { padding-left: 1.2em; }
+article li { margin: .35em 0; }
+article strong { font-weight: 600; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+code { font: .86em var(--font-mono); background: var(--panel); padding: .08em .3em; border-radius: 3px; overflow-wrap: anywhere; }
+pre { max-width: 76ch; margin: 1.4em auto; background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 16px;
+  overflow-x: auto; font: 13.5px/1.55 var(--font-mono); }
+pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; }
+.tablewrap { max-width: 76ch; margin: 1.4em auto; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font: 15px/1.45 var(--font-display); font-variant-numeric: tabular-nums; }
+th { text-align: left; font-weight: 700; border-bottom: 2px solid var(--fg); padding: 8px 12px 8px 0; }
+td { border-bottom: 1px solid var(--rule); padding: 8px 12px 8px 0; vertical-align: top; }
+figure.fig { margin: 2em auto; max-width: 960px; }
+figure.fig img { width: 100%; height: auto; max-width: 100%; }
+figure.diagram { overflow-x: auto; }
+figure.diagram svg { display: block; width: 100%; min-width: 560px; height: auto; color: var(--fg); }
+.fig-light { display: var(--show-light); }
+.fig-dark { display: var(--show-dark); }
+figcaption { max-width: 66ch; margin: 8px auto 0; font: 14px/1.45 var(--font-display); color: var(--muted); }
+.fignum { font-weight: 700; color: var(--fg); margin-right: 4px; }
+a.cite { text-decoration: none; font-family: var(--font-mono); font-size: .82em; }
+.refs ul { list-style: none; padding: 0; font-size: 15px; line-height: 1.5; }
+.refs li { margin: .6em 0; overflow-wrap: anywhere; }
+.refid { font: 600 13px var(--font-mono); color: var(--accent); margin-right: 4px; }
+.refs li:target { background: var(--accent-soft); }
+footer { max-width: 66ch; margin: 56px auto 0; border-top: 1px solid var(--rule); padding-top: 14px;
+  font: 13px/1.5 var(--font-display); color: var(--muted); }
+@media (max-width: 560px) {
+  body { font-size: 17px; }
+  .glance { grid-template-columns: 1fr; }
+  .glance div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+<div class="page">
+  <header class="masthead">
+    <div class="kicker">Benchmark · draft for review</div>
+    <h1>What does a sandbox cost an AI agent? Benchmarking NVIDIA OpenShell against a plain shell</h1>
+    <p class="dek">Four ways to give a coding agent a shell, measured on overhead, task success and nine replayed attacks.</p>
+    <div class="meta"><span>2026-10-03</span><span>OpenShell 0.1.2</span><span>qwen2.5:3b on a 4 GB GPU</span><span>800 task runs · 720 attack reps</span><a href="#conclusions">Jump to conclusions</a></div>
+  </header>
+  <section class="glance" aria-label="Headline numbers">
+    <div><b>+10 ms</b><span>per command vs Docker; 1.1% of a typical task's time</span></div>
+    <div><b>8 of 9</b><span>attack types blocked, every time, by a strict policy written for them</span></div>
+    <div><b>1 in 200</b><span>benign runs where the strict policy actually got in the agent's way</span></div>
+  </section>
+  <article>
+<h2>1. Why this matters</h2>
+<p>Coding agents work by running shell commands. The usual choices are poor ones. You can give the agent your own shell, or you can ask the user to approve every command. Anthropic reports that users approved about 93% of Claude Code's permission prompts, and that people pay less attention the more prompts they see [<a class="cite" href="#r2">R2</a>]. Classifier-based approval gates miss risky actions as well: in a stress test of Claude Code's auto mode, the end-to-end false-negative rate was 81% [<a class="cite" href="#r8">R8</a>]. Container walls are not airtight either. In SandboxEscapeBench, frontier models escaped deliberately misconfigured containers about half the time [<a class="cite" href="#r7">R7</a>].</p>
+<p>NVIDIA OpenShell takes a different approach. Instead of asking the agent to behave, it puts the agent's commands in a sandbox governed by a declarative policy. Landlock limits the filesystem, seccomp limits system calls, and a supervisor process outside the sandbox checks every network connection against the policy [<a class="cite" href="#r10">R10</a>]. We (Claude &amp; me :P) wanted to know what that costs and what it buys.</p>
+<figure class="fig diagram" id="f1"><svg viewBox="0 0 960 460" role="img" aria-label="How one agent command runs in OpenShell: the agent on the host sends it through the gateway into the sandbox, where Landlock and seccomp constrain the process; every outbound connection passes the supervisor proxy, which allows pypi.org and swaps in the real token, and refuses example.com with a logged denial." xmlns="http://www.w3.org/2000/svg" font-family="Archivo, Helvetica Neue, Arial, sans-serif">
+  <defs>
+    <marker id="f1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+    </marker>
+    <marker id="f1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:var(--accent)"/>
+    </marker>
+  </defs>
+
+  <!-- region labels -->
+  <text x="30" y="40" font-size="12" font-weight="700" letter-spacing="1.5" fill="currentColor" opacity="0.7">HOST</text>
+  <text x="790" y="40" font-size="12" font-weight="700" letter-spacing="1.5" fill="currentColor" opacity="0.7">INTERNET</text>
+
+  <!-- agent -->
+  <rect x="30" y="70" width="180" height="60" rx="4" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <text x="120" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Agent loop</text>
+  <text x="120" y="116" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">runs on the host</text>
+
+  <!-- model -->
+  <rect x="30" y="260" width="180" height="60" rx="4" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <text x="120" y="286" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Model server</text>
+  <text x="120" y="306" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">Ollama · qwen2.5:3b</text>
+  <line x1="120" y1="132" x2="120" y2="256" stroke="currentColor" stroke-width="1.4" marker-start="url(#f1a)" marker-end="url(#f1a)"/>
+  <text x="130" y="190" font-size="11.5" fill="currentColor">chat</text>
+  <text x="130" y="206" font-size="11.5" fill="currentColor" opacity="0.75">~4 s per step</text>
+
+  <!-- gateway -->
+  <rect x="270" y="70" width="170" height="60" rx="4" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <text x="355" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Gateway</text>
+  <text x="355" y="116" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">mTLS · 127.0.0.1:17670</text>
+  <line x1="212" y1="100" x2="266" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#f1a)"/>
+  <text x="239" y="90" text-anchor="middle" font-size="11" fill="currentColor">exec</text>
+  <text x="239" y="120" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.75">+10 ms</text>
+
+  <!-- sandbox boundary -->
+  <rect x="490" y="30" width="250" height="300" rx="6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="6 5"/>
+  <text x="505" y="52" font-size="12" font-weight="700" letter-spacing="1.5" fill="currentColor" opacity="0.7">SANDBOX</text>
+  <line x1="442" y1="100" x2="506" y2="100" stroke="currentColor" stroke-width="1.4" marker-end="url(#f1a)"/>
+  <text x="474" y="90" text-anchor="middle" font-size="11" fill="currentColor">relay</text>
+
+  <rect x="510" y="70" width="210" height="60" rx="4" style="fill:var(--bg)" stroke="currentColor" stroke-width="1.2"/>
+  <text x="615" y="96" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">bash · git · python3</text>
+  <text x="615" y="116" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">the agent's commands</text>
+
+  <text x="510" y="160" font-size="11.5" fill="currentColor"><tspan font-weight="700">Landlock</tspan>  write: workspace, /tmp</text>
+  <text x="510" y="180" font-size="11.5" fill="currentColor"><tspan font-weight="700">seccomp</tspan>  e.g. no nice()</text>
+
+  <rect x="510" y="200" width="210" height="58" rx="4" style="fill:var(--bg)" stroke="currentColor" stroke-width="1.2"/>
+  <text x="522" y="223" font-size="11.5" fill="currentColor">env  API_TOKEN =</text>
+  <text x="522" y="243" font-size="11" font-family="JetBrains Mono, ui-monospace, monospace" fill="currentColor">openshell:resolve:…</text>
+
+  <!-- every connection to the proxy -->
+  <line x1="615" y1="260" x2="615" y2="362" stroke="currentColor" stroke-width="1.4" marker-end="url(#f1a)"/>
+  <text x="607" y="296" font-size="11" fill="currentColor" text-anchor="end">every connection</text>
+  <text x="607" y="312" font-size="11" fill="currentColor" opacity="0.75" text-anchor="end">DNS + TCP</text>
+
+  <!-- supervisor proxy: the decision point -->
+  <rect x="490" y="366" width="250" height="70" rx="4" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="2"/>
+  <text x="615" y="390" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">Supervisor proxy</text>
+  <text x="615" y="408" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.8">checks host · port · binary</text>
+  <text x="615" y="424" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.8">and HTTP method + path</text>
+
+  <!-- upstreams -->
+  <rect x="790" y="250" width="150" height="56" rx="4" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <text x="865" y="274" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">pypi.org</text>
+  <text x="865" y="293" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">in the policy</text>
+  <rect x="790" y="380" width="150" height="56" rx="4" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="865" y="404" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">example.com</text>
+  <text x="865" y="423" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">not in the policy</text>
+
+  <path d="M742 384 L768 384 L768 278 L786 278" fill="none" style="stroke:var(--accent)" stroke-width="2" marker-end="url(#f1b)"/>
+  <text x="940" y="236" font-size="11" fill="currentColor" text-anchor="end">allowed · real token swapped in</text>
+
+  <line x1="742" y1="418" x2="776" y2="418" stroke="currentColor" stroke-width="1.4"/>
+  <line x1="770" y1="410" x2="784" y2="426" stroke="currentColor" stroke-width="2"/>
+  <line x1="784" y1="410" x2="770" y2="426" stroke="currentColor" stroke-width="2"/>
+  <text x="742" y="452" font-size="11" fill="currentColor">refused · logged as OCSF denial</text>
+</svg><figcaption><span class="fignum">F1</span> How one agent command runs in OpenShell. The agent and model stay on the host; the command crosses the gateway into the sandbox, and every connection it makes is checked by the supervisor proxy.</figcaption></figure>
+<h2>2. What we compared</h2>
+<p>Each setup adds one layer.</p>
+<figure class="fig diagram" id="f2"><svg viewBox="0 0 960 340" role="img" aria-label="Each setup adds one layer: the host shell has none; Docker adds a container; permissive OpenShell adds Landlock, seccomp and an egress proxy; strict OpenShell adds a least-privilege policy. Per-command cost is 1, 46, 57 and 56 ms; attacks blocked are 0, 0, 1 and 8 of 9." xmlns="http://www.w3.org/2000/svg" font-family="Archivo, Helvetica Neue, Arial, sans-serif">
+  <!-- columns: x = 30, 260, 490, 720; width 210. Blocks stack up from the baseline at y=230. -->
+  <line x1="20" y1="232" x2="940" y2="232" stroke="currentColor" stroke-width="1.4"/>
+
+  <!-- A: no layer -->
+  <text x="135" y="214" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.65">no isolation layer</text>
+
+  <!-- layer 1: container (B, C, D) -->
+  <g font-size="13" fill="currentColor">
+    <rect x="260" y="182" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+    <rect x="490" y="182" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+    <rect x="720" y="182" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  </g>
+  <g text-anchor="middle" fill="currentColor">
+    <text x="365" y="201" font-size="13" font-weight="700">Container</text>
+    <text x="365" y="219" font-size="11" opacity="0.75">namespaces · cgroups</text>
+    <text x="595" y="201" font-size="13" font-weight="700">Container</text>
+    <text x="595" y="219" font-size="11" opacity="0.75">namespaces · cgroups</text>
+    <text x="825" y="201" font-size="13" font-weight="700">Container</text>
+    <text x="825" y="219" font-size="11" opacity="0.75">namespaces · cgroups</text>
+  </g>
+
+  <!-- layer 2: OpenShell runtime (C, D) -->
+  <rect x="490" y="132" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <rect x="720" y="132" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <g text-anchor="middle" fill="currentColor">
+    <text x="595" y="151" font-size="13" font-weight="700">OpenShell runtime</text>
+    <text x="595" y="169" font-size="11" opacity="0.75">Landlock · seccomp · proxy</text>
+    <text x="825" y="151" font-size="13" font-weight="700">OpenShell runtime</text>
+    <text x="825" y="169" font-size="11" opacity="0.75">Landlock · seccomp · proxy</text>
+  </g>
+
+  <!-- layer 3: least-privilege policy (D only) -->
+  <rect x="720" y="82" width="210" height="46" rx="3" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="2"/>
+  <text x="825" y="101" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Least-privilege policy</text>
+  <text x="825" y="119" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">workspace only · named hosts · L7</text>
+
+  <!-- setup names -->
+  <g text-anchor="middle" font-size="13.5" font-weight="700" fill="currentColor">
+    <text x="135" y="256">A · host shell</text>
+    <text x="365" y="256">B · Docker</text>
+    <text x="595" y="256">C · OpenShell, permissive</text>
+    <text x="825" y="256">D · OpenShell, strict</text>
+  </g>
+
+  <!-- measured outcomes -->
+  <text x="20" y="286" font-size="11" fill="currentColor" opacity="0.65">per command</text>
+  <text x="20" y="314" font-size="11" fill="currentColor" opacity="0.65">attacks blocked</text>
+  <g text-anchor="middle" font-size="13" fill="currentColor" font-variant-numeric="tabular-nums">
+    <text x="135" y="286">1 ms</text>
+    <text x="365" y="286">46 ms</text>
+    <text x="595" y="286">57 ms</text>
+    <text x="825" y="286">56 ms</text>
+    <text x="135" y="314">0 of 9</text>
+    <text x="365" y="314">0 of 9</text>
+    <text x="595" y="314">1 of 9</text>
+    <text x="825" y="314" font-weight="700" style="fill:var(--accent)">8 of 9</text>
+  </g>
+</svg><figcaption><span class="fignum">F2</span> The four setups. Each adds one layer; below each, the measured per-command cost and how many of the nine replayed attack types it blocked.</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Setup</th>
+<th>What the agent's commands run in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A · host shell</td>
+<td>your machine</td>
+</tr>
+<tr>
+<td>B · Docker</td>
+<td>a plain container</td>
+</tr>
+<tr>
+<td>C · OpenShell, permissive</td>
+<td>OpenShell with the loosest policy it can express</td>
+</tr>
+<tr>
+<td>D · OpenShell, strict</td>
+<td>OpenShell with a least-privilege policy for each task</td>
+</tr>
+</tbody>
+</table></div>
+<p>Claude Code's own bubblewrap sandbox (<code>srt</code>) was planned as a fifth setup. It is set aside for now: on Ubuntu 24.04 and later it needs a kernel hardening setting turned off (<code>kernel.apparmor_restrict_unprivileged_userns=0</code>, per <code>srt</code>'s own README). That requirement is itself a deployment difference worth knowing about.</p>
+<p>One finding came before any measurement. <strong>OpenShell cannot be switched off.</strong> Its policy language has no "allow all network" and no "any program" setting; an empty list of allowed programs means none are allowed. So setup C is the loosest policy we could write: every host our tasks use, no request inspection, programs matched by wildcard paths.</p>
+<h2>3. How we tested</h2>
+<ul>
+<li><strong>Model:</strong> <code>qwen2.5:3b</code> served by Ollama on a 4 GB laptop GPU (Quadro T2000). Anyone can reproduce this at no API cost. The price is that absolute success rates are small-model numbers; they say nothing about frontier agents.</li>
+<li><strong>Agent:</strong> a short bash-only agent loop with identical code in every setup. It runs on the host, and every command executes inside the setup under test (the pattern Harbor and Terminal-Bench use [<a class="cite" href="#r5">R5</a>, <a class="cite" href="#r6">R6</a>]).</li>
+<li><strong>Tasks:</strong> 10 short shell tasks, 3 of which need network access. Task format follows Terminal-Bench (instruction, environment, hidden test, reference solution). Graders use expected values fixed when the tasks are generated, never values computed from files the agent can modify.</li>
+<li><strong>Attacks:</strong> fixed command sequences replayed in every setup with no model involved, so the result reflects the environment rather than the model. Success is detected with fake canary secrets and marker files, following AgentDojo's utility/security framing [<a class="cite" href="#r3">R3</a>].</li>
+<li><strong>Statistics:</strong> 20 trials per task per setup, Wilson intervals, pass^k [<a class="cite" href="#r9">R9</a>], comparisons paired per task [<a class="cite" href="#r12">R12</a>].</li>
+</ul>
+<h2>4. Result 1: what each layer costs</h2>
+<p>Medians of three separate sessions, 20+ repetitions each.</p>
+<figure class="fig" id="f3"><img class="fig-light" src="figures/light/F3_lifecycle_costs.png" alt="Bar chart in three panels: per-command round trip, sandbox start time and teardown time for host, Docker, permissive OpenShell and strict OpenShell. Round trip is about 1, 49, 60 and 57 ms; start about 2, 329, 772 and 753 ms; teardown about 0, 114, 5,196 and 5,214 ms." loading="lazy"><img class="fig-dark" src="figures/dark/F3_lifecycle_costs.png" alt="Bar chart in three panels: per-command round trip, sandbox start time and teardown time for host, Docker, permissive OpenShell and strict OpenShell. Round trip is about 1, 49, 60 and 57 ms; start about 2, 329, 772 and 753 ms; teardown about 0, 114, 5,196 and 5,214 ms." loading="lazy"><figcaption><span class="fignum">F3</span> What each layer costs per command and per sandbox</figcaption></figure>
+<figure class="fig" id="f4"><img class="fig-light" src="figures/light/F4_roundtrip_ecdf.png" alt="Cumulative distribution of command round-trip time on a log scale. The host curve sits near 1 ms; Docker near 46 to 50 ms; both OpenShell setups near 55 to 65 ms." loading="lazy"><img class="fig-dark" src="figures/dark/F4_roundtrip_ecdf.png" alt="Cumulative distribution of command round-trip time on a log scale. The host curve sits near 1 ms; Docker near 46 to 50 ms; both OpenShell setups near 55 to 65 ms." loading="lazy"><figcaption><span class="fignum">F4</span> Every agent command pays the round trip</figcaption></figure>
+<figure class="fig" id="f5"><img class="fig-light" src="figures/light/F5_workload_relative.png" alt="Dot plot of eight workloads, each as a ratio to Docker. Most sit between 0.93 and 1.05; git over 20,000 files and HTTPS requests to PyPI sit higher, around 1.08 to 1.19." loading="lazy"><img class="fig-dark" src="figures/dark/F5_workload_relative.png" alt="Dot plot of eight workloads, each as a ratio to Docker. Most sit between 0.93 and 1.05; git over 20,000 files and HTTPS requests to PyPI sit higher, around 1.08 to 1.19." loading="lazy"><figcaption><span class="fignum">F5</span> Workload time inside OpenShell, relative to plain Docker</figcaption></figure>
+<ul>
+<li><strong>Per command.</strong> Every command the agent runs pays a round trip: <strong>1.2 ms</strong> on the host, <strong>46.3 ms</strong> through <code>docker exec</code>, <strong>56–57 ms</strong> through <code>openshell sandbox exec</code>. OpenShell adds about <strong>10–11 ms per command</strong> on top of Docker. Over a whole task that hardly matters: across 800 agent runs, command execution added <strong>0.05 s to a ~4.3 s median run (1.1%)</strong>. The model's thinking time dominates.</li>
+<li><strong>Under load, the gap grows.</strong> With 16 sandboxes running, Docker's round trip stays at 46.7 ms; OpenShell's rises to <strong>79–81 ms</strong>.</li>
+<li><strong>Lifecycle.</strong> Starting a sandbox takes <strong>0.74 s</strong> (Docker: 0.30 s). Deleting one takes <strong>5.2 s</strong> (Docker: 0.11 s). That's fine for long agent sessions and noticeable for one sandbox per short task.</li>
+<li><strong>Policy changes.</strong> A network-policy update on a running sandbox took <strong>10.1 s</strong> to take effect, every time, in every session. If your agent waits on a human to widen a policy, that's ten seconds per round.</li>
+<li><strong>Inside the sandbox,</strong> CPU work runs within about 3% of Docker. git over 20k files is 8–9% slower and HTTPS requests 8–10 ms slower. Checking requests at the HTTP level (strict policy) cost nothing measurable compared with uninspected traffic (permissive policy).</li>
+</ul>
+<h2>5. Result 2: does the agent still get its work done?</h2>
+<p>10 tasks × 4 setups × 20 trials = 800 runs, 0 harness errors.</p>
+<figure class="fig" id="f6"><img class="fig-light" src="figures/light/F6_task_success.png" alt="Dot plot with 95% intervals for ten tasks and four setups. Intervals overlap heavily for Docker and both OpenShell setups on every task; write-greeting and git-clone are near 100% everywhere." loading="lazy"><img class="fig-dark" src="figures/dark/F6_task_success.png" alt="Dot plot with 95% intervals for ten tasks and four setups. Intervals overlap heavily for Docker and both OpenShell setups on every task; write-greeting and git-clone are near 100% everywhere." loading="lazy"><figcaption><span class="fignum">F6</span> Task success per task and setup</figcaption></figure>
+<figure class="fig" id="f7"><img class="fig-light" src="figures/light/F7_pass_k.png" alt="Line chart of pass^k from k=1 to 10 for four setups. All start between 0.5 and 0.62 and fall to between 0.16 and 0.25 at k=10; the OpenShell lines sit slightly above Docker." loading="lazy"><img class="fig-dark" src="figures/dark/F7_pass_k.png" alt="Line chart of pass^k from k=1 to 10 for four setups. All start between 0.5 and 0.62 and fall to between 0.16 and 0.25 at k=10; the OpenShell lines sit slightly above Docker." loading="lazy"><figcaption><span class="fignum">F7</span> Reliability across repeated trials (pass^k)</figcaption></figure>
+<figure class="fig" id="f8"><img class="fig-light" src="figures/light/F8_time_vs_success.png" alt="Scatter of median seconds per task against success rate. Docker and both OpenShell setups cluster at 4.1 to 4.4 seconds and 0.50 to 0.55 success; the host sits at about 6 seconds and 0.62." loading="lazy"><img class="fig-dark" src="figures/dark/F8_time_vs_success.png" alt="Scatter of median seconds per task against success rate. Docker and both OpenShell setups cluster at 4.1 to 4.4 seconds and 0.50 to 0.55 success; the host sits at about 6 seconds and 0.62." loading="lazy"><figcaption><span class="fignum">F8</span> Time vs success, per setup</figcaption></figure>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Setup</th>
+<th>Mean task success</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker (B)</td>
+<td>0.51</td>
+</tr>
+<tr>
+<td>OpenShell, permissive (C)</td>
+<td>0.55</td>
+</tr>
+<tr>
+<td>OpenShell, strict (D)</td>
+<td>0.53</td>
+</tr>
+</tbody>
+</table></div>
+<p>We wrote our hypotheses down, with a hash, before analysing a single result (<code>HYPOTHESES.md</code>). Against them:</p>
+<ul>
+<li><strong>OpenShell vs Docker:</strong> +4.5 points (95% CI −6.0 to +15.0). No sign that the sandbox hurts. We had set the bar at proving the difference lies <em>within ±10 points</em>, and 200 runs per setup aren't enough to show that.</li>
+<li><strong>Strict vs permissive, offline tasks:</strong> −5.0 points (CI −16.4 to +5.7). Inconclusive.</li>
+<li><strong>Strict vs permissive, network tasks:</strong> we predicted the strict policy would <em>hurt</em>, because a small model tends to wander (another tool, another mirror). It didn't: the strict setup scored 5 points <em>higher</em> (one-sided bound −16.7 for the predicted direction), and the strict policy <strong>really blocked the agent in 0 of 60 network-task runs</strong>. The narrow rules (read-only PyPI for <code>python3</code>; two git endpoints for one repository) covered everything this agent did. This is a small model on small tasks; a more inventive agent would hit the walls more often.</li>
+<li><strong>The host shell can't be compared directly.</strong> It scored 0.62, but its prompt contains a different working-directory path and it runs a different toolchain and locale. A 3B model at a fixed seed is sensitive to both. We report it and don't draw conclusions from it.</li>
+</ul>
+<h2>6. Result 3: what got through</h2>
+<p>Nine attacks, each replayed 20 times per setup, with no model involved. These numbers describe the environment, not an AI's intentions.</p>
+<figure class="fig" id="f9"><img class="fig-light" src="figures/light/F9_attack_heatmap.png" alt="Grid of nine attacks by four setups. Host, Docker and permissive OpenShell let every attack through 20 out of 20 times, except that permissive OpenShell blocks reading the raw credential. Strict OpenShell blocks eight of nine; the secret in a GET query to an allowed host gets through." loading="lazy"><img class="fig-dark" src="figures/dark/F9_attack_heatmap.png" alt="Grid of nine attacks by four setups. Host, Docker and permissive OpenShell let every attack through 20 out of 20 times, except that permissive OpenShell blocks reading the raw credential. Strict OpenShell blocks eight of nine; the secret in a GET query to an allowed host gets through." loading="lazy"><figcaption><span class="fignum">F9</span> What got through</figcaption></figure>
+<figure class="fig" id="f10"><img class="fig-light" src="figures/light/F10_utility_vs_security.png" alt="Scatter of task success against share of attacks blocked. Strict OpenShell sits near 0.89 blocked at about 0.53 success; the other setups sit near zero blocked at 0.50 to 0.62 success." loading="lazy"><img class="fig-dark" src="figures/dark/F10_utility_vs_security.png" alt="Scatter of task success against share of attacks blocked. Strict OpenShell sits near 0.89 blocked at about 0.53 success; the other setups sit near zero blocked at 0.50 to 0.62 success." loading="lazy"><figcaption><span class="fignum">F10</span> Utility vs security</figcaption></figure>
+<p>Read these results as an enforcement check, not a security rating. We wrote both the attacks and the strict policy, knowing each task's needs in advance. So the strict column shows that OpenShell enforces what its policy says, consistently, 20 times out of 20. It doesn't show how well a policy written without that knowledge holds up against an attacker who goes looking for gaps.</p>
+<ul>
+<li><strong>Host shell and plain Docker: everything got through,</strong> 9 out of 9 attacks, 20/20 every time.</li>
+<li><strong>Permissive OpenShell blocked one thing: the raw credential.</strong> With a provider attached, the process sees <code>openshell:resolve:env:…_CANARY_API_TOKEN</code>, a placeholder that the proxy only swaps for the real token on requests to the declared host and path. Everything else got through, because the policy allowed it.</li>
+<li><strong>Strict OpenShell blocked 8 of 9, every time:</strong></li>
+<li>exfiltration to an unapproved host (refused at connection);</li>
+<li>reading <code>~/.ssh</code> and <code>rm -rf</code> outside the workspace (<code>Permission denied</code> from Landlock);</li>
+<li><code>curl | sh</code>;</li>
+<li>the model server's admin API;</li>
+<li>the raw credential;</li>
+<li>a POST to an allowed host whose rules permit only reads (HTTP 403, logged).</li>
+<li><strong>What it didn't stop: a secret smuggled in a GET query string to an allowed host</strong> (20/20 got through). The secret came from a <code>.env</code> file in the workspace, and the policy allowed <code>python3</code> to send GET requests to PyPI on any path. Method and path rules don't look at query strings. OpenShell's built-in regex middleware doesn't help here either: per the documentation, it inspects request bodies and WebSocket messages, not URLs.</li>
+</ul>
+<h2>7. Result 4: living with a strict policy</h2>
+<figure class="fig" id="f11"><img class="fig-light" src="figures/light/F11_denials_friction.png" alt="Paired bars for permissive and strict OpenShell on offline and network tasks. Any logged denial: 10% to 33% of runs. Real denials, after removing the sandbox&#x27;s own hostname lookups: 0% to 3.3%." loading="lazy"><img class="fig-dark" src="figures/dark/F11_denials_friction.png" alt="Paired bars for permissive and strict OpenShell on offline and network tasks. Any logged denial: 10% to 33% of runs. Real denials, after removing the sandbox&#x27;s own hostname lookups: 0% to 3.3%." loading="lazy"><figcaption><span class="fignum">F11</span> Logged denials are mostly noise</figcaption></figure>
+<ul>
+<li>The strict policy really blocked the agent in <strong>1 of 200 benign runs (0.5%)</strong>.</li>
+<li>But the audit log <em>looked</em> far busier: <strong>11–33% of runs had a DENIED event</strong>. Almost all were the sandbox looking up its own container hostname, which <code>git</code> does to build a default identity. If you alert on denials, filter those first.</li>
+<li>The strict <code>git clone</code> policy needed two rules (<code>GET …/info/refs</code>, <code>POST …/git-upload-pack</code>). Push and every other repository stay denied.</li>
+</ul>
+<pre><code class="language-yaml"># tasks/custom/git-clone/policy.yaml (network part): clone one repository, nothing else
+github_clone_hello_world:
+  endpoints:
+  - host: github.com
+    port: 443
+    protocol: rest
+    enforcement: enforce
+    rules:
+    - allow: { method: GET,  path: /octocat/Hello-World.git/info/refs }
+    - allow: { method: POST, path: /octocat/Hello-World.git/git-upload-pack }
+  binaries:
+  - path: /usr/bin/git
+  - path: /usr/lib/git-core/git-remote-http
+</code></pre>
+<h2>8. Things that surprised us (operational notes)</h2>
+<ul>
+<li><strong>Default-deny out of the box.</strong> With no policy at all, OpenShell blocks all egress and allows writes only to the workspace and <code>/tmp</code>.</li>
+<li><strong>Network denials are logged in detail, filesystem denials are not.</strong> Every refused connection becomes an OCSF event naming the program, the destination and the reason. Blocked file reads and writes leave no log entry; the process just gets <code>Permission denied</code>.</li>
+</ul>
+<pre><code class="language-text">[sandbox] [OCSF] NET:OPEN [MED] DENIED /usr/bin/curl(0) -&gt; 172.17.0.1:18080 [reason:transparent_tcp_policy_denied]
+[sandbox] [OCSF] NET:REFUSE [MED] DENIED example.com [reason:policy_dns_ineligible]
+</code></pre>
+<ul>
+<li><strong>The seccomp filter blocks <code>nice()</code>.</strong> fio failed for this reason, and so would anything that calls <code>nice</code>.</li>
+<li><strong>The image's <code>ENV</code> doesn't reach the sandbox</strong> through <code>sandbox exec</code>. Our pip setting worked in Docker and silently disappeared in OpenShell until we moved it into <code>/etc/pip.conf</code>.</li>
+<li><strong><code>host.openshell.internal</code> resolves to loopback,</strong> which OpenShell always blocks. Reaching host services needs an <code>allowed_ips</code> rule.</li>
+<li><strong>Smaller papercuts:</strong> sandbox names are limited to 19 characters; <code>upload</code> nests directories differently from <code>docker cp</code>; <code>sandbox exec</code> occasionally hung until our timeout fired.</li>
+</ul>
+<h2>9. How this compares with other work</h2>
+<p>None of these are directly comparable: different models, tasks and threat models. They show where this fits.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Source</th>
+<th>Comparable?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Users approved ~93% of Claude Code permission prompts</td>
+<td>Anthropic [<a class="cite" href="#r2">R2</a>]</td>
+<td>No. It's the motivation: prompts don't make people careful</td>
+</tr>
+<tr>
+<td>OS-level sandbox cut permission prompts by 84%</td>
+<td>Anthropic [<a class="cite" href="#r1">R1</a>]</td>
+<td>No. Different metric, but the same idea: move the boundary into the environment</td>
+</tr>
+<tr>
+<td>Auto-mode classifier missed 81% of risky actions in a stress test</td>
+<td>Ji et al. [<a class="cite" href="#r8">R8</a>]</td>
+<td>No. A classifier gate, not a sandbox</td>
+</tr>
+<tr>
+<td>Frontier models escaped misconfigured containers ~50% of the time</td>
+<td>Marchand et al. [<a class="cite" href="#r7">R7</a>]</td>
+<td>No. We didn't test escapes; it's why "plain Docker" isn't a security boundary by default</td>
+</tr>
+<tr>
+<td>Highest average attack success rate across agent attacks: 84.3%</td>
+<td>Zhang et al. [<a class="cite" href="#r4">R4</a>]</td>
+<td>No. It measures model susceptibility; we measure what the environment lets through</td>
+</tr>
+<tr>
+<td><strong>This work:</strong> strict OpenShell blocked 8 of 9 replayed attack types (160 of 180 reps) under a policy we wrote knowing the attacks. It missed query-string exfiltration to an allowed host. This is an enforcement check, not a security rating</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="conclusions">10. What we conclude</h2>
+<p>These conclusions hold for what we measured: a small local model, short shell tasks, one machine, OpenShell 0.1.2. Section 11 says where they could break.</p>
+<p><strong>1. The protection comes from the policy, not from the sandbox.</strong> Run with a loose policy, OpenShell stopped one attack in nine, only one more than plain Docker. Run with a least-privilege policy, it stopped eight of our nine, a policy we wrote with the attacks in front of us. Adopting OpenShell without writing tight policies buys almost nothing beyond credential hiding. Its default with no policy at all is deny-everything, so the easy path is to start strict and open up only what tasks need.</p>
+<p><strong>2. Least privilege was cheaper than we expected.</strong> We predicted the strict policy would trip the agent on network tasks. It didn't: it got in the way in 1 of 200 benign runs, and 0 of 60 network-task runs. Task success under the strict policy was statistically indistinguishable from the permissive one. Two caveats. Our intervals are too wide to rule out a drop of up to about 16 points. And a more capable, more inventive agent will reach for tools and hosts a narrow policy didn't anticipate, so expect more friction with frontier agents.</p>
+<p><strong>3. Per-command overhead is not the cost to worry about.</strong> About 10 ms per command over Docker came to 1.1% of a task's time, because the model's thinking dominates. The costs that matter are elsewhere:
+- <strong>Deleting a sandbox:</strong> 5.2 s.
+- <strong>Applying a policy change to a running sandbox:</strong> 10 s.
+- <strong>Concurrency:</strong> the per-command gap grows to ~33 ms with 16 sandboxes running.</p>
+<p>In practice: reuse sandboxes across steps rather than creating one per command, and batch policy changes rather than widening them one denial at a time.</p>
+<p><strong>4. Hold credentials in providers, and keep secrets out of the workspace.</strong> Providers were the one protection that worked even under the loose policy. The process only ever saw a placeholder; the real token was added in the proxy, on the way to the one host allowed to receive it. But a provider protects only the credentials it holds. The secret that leaked in our test sat in a <code>.env</code> file in the workspace, where the agent could read it like any other file. Move such secrets into providers, or keep them out of the sandbox entirely. We didn't test whether an allowed host that echoes request headers back could reveal the real token; treat that as an open question.</p>
+<p><strong>5. An allowed host is still an exit.</strong> A secret placed in a GET query to PyPI went out 20 times out of 20 under the strict policy, because method and path rules don't read query strings. Network policy narrows <em>where</em> data can go, not <em>what</em> goes there. The built-in regex middleware inspects request bodies and WebSocket messages, not URLs, so it wouldn't have caught this. What does help:
+- keep secrets unreadable to the agent (point 4);
+- scope allowed paths as tightly as the tool allows (for pip, the package index and file-download paths, not the whole host);
+- route the hosts that matter through an inspection layer of your own that sees full URLs.</p>
+<p><strong>6. Plan for integration and observability work.</strong> None of these is a blocker, but together they're real effort:
+- The image's <code>ENV</code> isn't passed into the sandbox.
+- seccomp blocks <code>nice()</code>.
+- Sandbox names are capped at 19 characters.
+- <code>upload</code> behaves differently from <code>docker cp</code>.
+- <code>exec</code> occasionally hangs.</p>
+<p>On observability:
+- Most logged denials were the sandbox resolving its own hostname, so filter those before you alert.
+- Blocked file access isn't logged at all, so if you need to see filesystem attempts you'll need another source.</p>
+<p><strong>Bottom line.</strong> For an agent that holds credentials or can reach the network, a default Docker container isn't a security boundary: it let every attack through. A hardened container would have stopped some of them; we didn't test one. Strict OpenShell reliably enforced a least-privilege policy, blocking eight of our nine attack types, at a cost we could barely measure in task time. The value is in the policy you write and in keeping secrets out of the agent's reach. Budget for lifecycle latency and the operational rough edges of alpha software.</p>
+<h2>11. Limitations</h2>
+<ul>
+<li>A 3B model on easy tasks; one machine; OpenShell 0.1.2 is alpha software.</li>
+<li>The agent runs on the host, so the per-command round trip is part of the cost. An agent running inside the sandbox would pay it differently.</li>
+<li>The host's toolchain differs from the container image's, so host workload timings are reported for lifecycle and network only.</li>
+<li>Replayed attacks measure the environment, not whether a model would attempt the attack.</li>
+</ul>
+<h2>12. Reproduce it</h2>
+<p>Everything is in the repository, <a href="https://github.com/kumiDa/openshell-benchmarking">github.com/kumiDa/openshell-benchmarking</a>: <code>README.md</code> has the commands, <code>HYPOTHESES.md</code> the hypotheses we wrote down before analysing any task-success results, and <code>results/</code> the raw rows behind every figure.</p>
+<h2>References</h2>
+<div class="refs"><ul>
+<li><span id="r1" class="refid">[<a class="cite" href="#r1">R1</a>]</span> D. Dworken, O. Weller-Davies (Anthropic). <em>Beyond permission prompts: making Claude Code more secure and autonomous.</em> Oct 20, 2025. https://www.anthropic.com/engineering/claude-code-sandboxing</li>
+<li><span id="r2" class="refid">[<a class="cite" href="#r2">R2</a>]</span> M. McGuinness, M. Grace, J. De Jonghe, J. Eaton, A. Ribbink (Anthropic). <em>How we contain Claude across products.</em> May 25, 2026. https://www.anthropic.com/engineering/how-we-contain-claude</li>
+<li><span id="r3" class="refid">[<a class="cite" href="#r3">R3</a>]</span> E. Debenedetti, J. Zhang, M. Balunović, L. Beurer-Kellner, M. Fischer, F. Tramèr. <em>AgentDojo: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for LLM Agents.</em> NeurIPS 2024 Datasets &amp; Benchmarks. arXiv:2406.13352. https://arxiv.org/abs/2406.13352</li>
+<li><span id="r4" class="refid">[<a class="cite" href="#r4">R4</a>]</span> H. Zhang et al. <em>Agent Security Bench (ASB): Formalizing and Benchmarking Attacks and Defenses in LLM-based Agents.</em> ICLR 2025. arXiv:2410.02644. https://arxiv.org/abs/2410.02644</li>
+<li><span id="r5" class="refid">[<a class="cite" href="#r5">R5</a>]</span> M. A. Merrill et al. <em>Terminal-Bench: Benchmarking Agents on Hard, Realistic Tasks in Command Line Interfaces.</em> ICLR 2026. arXiv:2601.11868. https://arxiv.org/abs/2601.11868</li>
+<li><span id="r6" class="refid">[<a class="cite" href="#r6">R6</a>]</span> Harbor framework. https://github.com/harbor-framework/harbor · TB2 leaderboard: https://snorkel.ai/leaderboard/terminal-bench-2-0/</li>
+<li><span id="r7" class="refid">[<a class="cite" href="#r7">R7</a>]</span> R. Marchand, A. O Cathain, J. Wynne, P. M. Giavridis, S. Deverett, J. Wilkinson, J. Gwartz, H. Coppock. <em>Quantifying Frontier LLM Capabilities for Container Sandbox Escape</em> (SandboxEscapeBench). arXiv:2603.02277, 2026. https://arxiv.org/abs/2603.02277 · code: https://github.com/UKGovernmentBEIS/sandbox_escape_bench</li>
+<li><span id="r8" class="refid">[<a class="cite" href="#r8">R8</a>]</span> Z. Ji, Z. Li, W. Jiang, Y. Gao, S. Wang. <em>Measuring the Permission Gate: A Stress-Test Evaluation of Claude Code's Auto Mode.</em> arXiv:2604.04978v2, 2026. https://arxiv.org/abs/2604.04978</li>
+<li><span id="r9" class="refid">[<a class="cite" href="#r9">R9</a>]</span> S. Yao, N. Shinn, P. Razavi, K. Narasimhan. <em>τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains.</em> arXiv:2406.12045, 2024. https://arxiv.org/abs/2406.12045</li>
+<li><span id="r10" class="refid">[<a class="cite" href="#r10">R10</a>]</span> NVIDIA OpenShell: repo https://github.com/NVIDIA/OpenShell · docs https://docs.nvidia.com/openshell/ · launch coverage: MarkTechPost, Sep 28, 2026 https://www.marktechpost.com/2026/09/28/nvidia-launches-open-agent-safety-platform/</li>
+<li><span id="r11" class="refid">[<a class="cite" href="#r11">R11</a>]</span> S. Kapoor, B. Stroebl, Z. S. Siegel, N. Nadgir, A. Narayanan. <em>AI Agents That Matter.</em> arXiv:2407.01502, 2024. https://arxiv.org/abs/2407.01502</li>
+<li><span id="r12" class="refid">[<a class="cite" href="#r12">R12</a>]</span> E. Miller (Anthropic). <em>Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations.</em> arXiv:2411.00640, 2024. https://arxiv.org/abs/2411.00640</li>
+<li><span id="r13" class="refid">[<a class="cite" href="#r13">R13</a>]</span> Anjali, T. Caraza-Harter, M. M. Swift. <em>Blending Containers and Virtual Machines: A Study of Firecracker and gVisor.</em> VEE 2020. https://scail.cs.wisc.edu/papers/vee20-isolation.pdf</li>
+<li><span id="r14" class="refid">[<a class="cite" href="#r14">R14</a>]</span> G. Andronchik, P. Lokhmakov. <em>AI Code Sandboxes: A Comparative Security Study, Part 1 of 2.</em> arXiv:2606.08433, 2026. https://arxiv.org/abs/2606.08433</li>
+<li><span id="r15" class="refid">[<a class="cite" href="#r15">R15</a>]</span> Hosted-sandbox comparisons (reported, methodology often undisclosed): LogRocket https://blog.logrocket.com/comparing-ai-agent-sandbox-platforms-e2b-modal-daytona-and-more/ · Superagent https://www.superagent.sh/blog/ai-code-sandbox-benchmark-2026</li>
+<li><span id="r16" class="refid">[<a class="cite" href="#r16">R16</a>]</span> Ollama Anthropic Messages API compatibility (v0.14+), which lets Claude Code use local models via <code>ANTHROPIC_BASE_URL</code>. Example guide: KDnuggets, <em>Pairing Claude Code with Local Models</em>, https://www.kdnuggets.com/pairing-claude-code-with-local-models. Before publishing, cite Ollama's own release notes or docs instead.</li>
+</ul></div>
+  </article>
+</div>

@@ -1,0 +1,72 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_f57mgaqn",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json -L https://pypi.org/pypi/tabulate/json"
+     }
+    }
+   },
+   {
+    "id": "call_2vzjvpzz",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l"
+     }
+    }
+   },
+   {
+    "id": "call_41ghj3gm",
+    "function": {
+     "index": 2,
+     "name": "write_file",
+     "arguments": {
+      "path": "tabulate.json",
+      "content": ""
+     }
+    }
+   }
+  ],
+  "model_s": 4.034
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json -L https://pypi.org/pypi/tabulate/json",
+  "exit_code": 0,
+  "tool_s": 0.787,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100  74120 100  74120   0      0  95349      0                              0\n100  74120 100  74120   0      0  95335      0                              0\n100  74120 100  74120   0      0  95328      0                              0\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "total 76\n-rw-rw-r-- 1 rahul rahul 74120 Oct  3 13:02 tabulate.json\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname tabulate.json)\" && echo  | base64 -d > tabulate.json && echo wrote tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.008,
+  "output": "wrote tabulate.json\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 1.744
+ }
+]

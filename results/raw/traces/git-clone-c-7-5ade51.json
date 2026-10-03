@@ -1,0 +1,61 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_amg3x52h",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello"
+     }
+    }
+   }
+  ],
+  "model_s": 1.172
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello",
+  "exit_code": 0,
+  "tool_s": 1.199,
+  "output": "\n[stderr]\nCloning into 'hello'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello\nmkdir -p hello created successfully.\nCloning into 'hello'... operation completed.\n",
+  "tool_calls": [
+   {
+    "id": "call_9idyfh7k",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "cd hello && git branch"
+     }
+    }
+   }
+  ],
+  "model_s": 3.034
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "cd hello && git branch",
+  "exit_code": 0,
+  "tool_s": 0.078,
+  "output": "* master\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.205
+ }
+]

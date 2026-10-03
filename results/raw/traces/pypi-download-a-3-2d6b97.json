@@ -1,0 +1,89 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_02vyogpy",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json"
+     }
+    }
+   },
+   {
+    "id": "call_224cb08u",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l"
+     }
+    }
+   },
+   {
+    "id": "call_wdo16a01",
+    "function": {
+     "index": 2,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json"
+     }
+    }
+   },
+   {
+    "id": "call_mpxxz2l1",
+    "function": {
+     "index": 3,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 6.524
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json",
+  "exit_code": 0,
+  "tool_s": 0.058,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100  37684 100  37684   0      0 755.1k      0                              0\n100  37684 100  37684   0      0 754.2k      0                              0\n100  37684 100  37684   0      0 753.4k      0                              0\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "total 40\n-rw-rw-r-- 1 rahul rahul 37684 Oct  3 11:40 tabulate.json\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json",
+  "exit_code": 0,
+  "tool_s": 0.05,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100  37684 100  37684   0      0 895.9k      0                              0\n100  37684 100  37684   0      0 894.5k      0                              0\n100  37684 100  37684   0      0 893.2k      0                              0\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "-rw-rw-r-- 1 rahul rahul 37684 Oct  3 11:40 tabulate.json\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 3.01
+ }
+]

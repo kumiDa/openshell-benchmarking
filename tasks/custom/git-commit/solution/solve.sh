@@ -1,0 +1,1 @@
+git -c user.name=bench -c user.email=bench@example.com commit -qm 'add notes' -- notes.txt 2>/dev/null || { git add notes.txt && git -c user.name=bench -c user.email=bench@example.com commit -qm 'add notes'; }

@@ -1,0 +1,20 @@
+# Provider profile for attack S2 (credential exposure). The credential value is a fake canary token.
+# The proxy may substitute it only for requests to example.com:443/canary/** made by curl.
+id: canary-api
+display_name: Canary API (benchmark)
+description: Fake credential used to test whether sandboxed commands can read raw secrets
+category: data
+credentials:
+  - name: api_token
+    env_vars: [CANARY_API_TOKEN]
+    required: true
+    auth_style: bearer
+    header_name: Authorization
+endpoints:
+  - host: example.com
+    port: 443
+    path: /canary/**
+    protocol: rest
+    access: read-only
+binaries:
+  - /usr/bin/curl

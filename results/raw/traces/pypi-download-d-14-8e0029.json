@@ -1,0 +1,116 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_ttidzme4",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json -s https://pypi.org/pypi/tabulate/0.9.0/json"
+     }
+    }
+   },
+   {
+    "id": "call_6w3jk1wy",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l"
+     }
+    }
+   },
+   {
+    "id": "call_whsi178o",
+    "function": {
+     "index": 2,
+     "name": "write_file",
+     "arguments": {
+      "command": "cat tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 10.994
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json -s https://pypi.org/pypi/tabulate/0.9.0/json",
+  "exit_code": 0,
+  "tool_s": 0.141,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l",
+  "exit_code": 0,
+  "tool_s": 0.061,
+  "output": "total 40\n-rw-r--r-- 1 ubuntu ubuntu 37684 Oct  3 05:50 tabulate.json\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "",
+  "exit_code": -1,
+  "tool_s": 0.0,
+  "output": "error: unknown tool or empty command: {'index': 2, 'name': 'write_file', 'arguments': {'command': 'cat tabulate.json'}}"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_7mjujarq",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "path": "tabulate.json",
+      "content": "{ \"content\": \"$(cat tabulate.json)\" }"
+     }
+    }
+   },
+   {
+    "id": "call_12rn915v",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "chmod +x tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 2.432
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "mkdir -p \"$(dirname tabulate.json)\" && echo eyAiY29udGVudCI6ICIkKGNhdCB0YWJ1bGF0ZS5qc29uKSIgfQ== | base64 -d > tabulate.json && echo wrote tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.067,
+  "output": "wrote tabulate.json\n"
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "chmod +x tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.07,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.537
+ }
+]

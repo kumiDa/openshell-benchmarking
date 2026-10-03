@@ -1,0 +1,46 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [],
+  "model_s": 0.959
+ },
+ {
+  "type": "nudge",
+  "turn": 0
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_sg1fe72t",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "find data/ -type f -name '*.tmp' -delete"
+     }
+    }
+   }
+  ],
+  "model_s": 0.925
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "find data/ -type f -name '*.tmp' -delete",
+  "exit_code": 0,
+  "tool_s": 0.055,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.268
+ }
+]

@@ -1,0 +1,59 @@
+<svg viewBox="0 0 960 340" role="img" aria-label="Each setup adds one layer: the host shell has none; Docker adds a container; permissive OpenShell adds Landlock, seccomp and an egress proxy; strict OpenShell adds a least-privilege policy. Per-command cost is 1, 46, 57 and 56 ms; attacks blocked are 0, 0, 1 and 8 of 9." xmlns="http://www.w3.org/2000/svg" font-family="Archivo, Helvetica Neue, Arial, sans-serif">
+  <!-- columns: x = 30, 260, 490, 720; width 210. Blocks stack up from the baseline at y=230. -->
+  <line x1="20" y1="232" x2="940" y2="232" stroke="currentColor" stroke-width="1.4"/>
+
+  <!-- A: no layer -->
+  <text x="135" y="214" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.65">no isolation layer</text>
+
+  <!-- layer 1: container (B, C, D) -->
+  <g font-size="13" fill="currentColor">
+    <rect x="260" y="182" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+    <rect x="490" y="182" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+    <rect x="720" y="182" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  </g>
+  <g text-anchor="middle" fill="currentColor">
+    <text x="365" y="201" font-size="13" font-weight="700">Container</text>
+    <text x="365" y="219" font-size="11" opacity="0.75">namespaces · cgroups</text>
+    <text x="595" y="201" font-size="13" font-weight="700">Container</text>
+    <text x="595" y="219" font-size="11" opacity="0.75">namespaces · cgroups</text>
+    <text x="825" y="201" font-size="13" font-weight="700">Container</text>
+    <text x="825" y="219" font-size="11" opacity="0.75">namespaces · cgroups</text>
+  </g>
+
+  <!-- layer 2: OpenShell runtime (C, D) -->
+  <rect x="490" y="132" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <rect x="720" y="132" width="210" height="46" rx="3" style="fill:var(--panel)" stroke="currentColor" stroke-width="1.2"/>
+  <g text-anchor="middle" fill="currentColor">
+    <text x="595" y="151" font-size="13" font-weight="700">OpenShell runtime</text>
+    <text x="595" y="169" font-size="11" opacity="0.75">Landlock · seccomp · proxy</text>
+    <text x="825" y="151" font-size="13" font-weight="700">OpenShell runtime</text>
+    <text x="825" y="169" font-size="11" opacity="0.75">Landlock · seccomp · proxy</text>
+  </g>
+
+  <!-- layer 3: least-privilege policy (D only) -->
+  <rect x="720" y="82" width="210" height="46" rx="3" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="2"/>
+  <text x="825" y="101" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor">Least-privilege policy</text>
+  <text x="825" y="119" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.8">workspace only · named hosts · L7</text>
+
+  <!-- setup names -->
+  <g text-anchor="middle" font-size="13.5" font-weight="700" fill="currentColor">
+    <text x="135" y="256">A · host shell</text>
+    <text x="365" y="256">B · Docker</text>
+    <text x="595" y="256">C · OpenShell, permissive</text>
+    <text x="825" y="256">D · OpenShell, strict</text>
+  </g>
+
+  <!-- measured outcomes -->
+  <text x="20" y="286" font-size="11" fill="currentColor" opacity="0.65">per command</text>
+  <text x="20" y="314" font-size="11" fill="currentColor" opacity="0.65">attacks blocked</text>
+  <g text-anchor="middle" font-size="13" fill="currentColor" font-variant-numeric="tabular-nums">
+    <text x="135" y="286">1 ms</text>
+    <text x="365" y="286">46 ms</text>
+    <text x="595" y="286">57 ms</text>
+    <text x="825" y="286">56 ms</text>
+    <text x="135" y="314">0 of 9</text>
+    <text x="365" y="314">0 of 9</text>
+    <text x="595" y="314">1 of 9</text>
+    <text x="825" y="314" font-weight="700" style="fill:var(--accent)">8 of 9</text>
+  </g>
+</svg>

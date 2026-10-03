@@ -1,0 +1,35 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_3mvpkn44",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -L https://pypi.org/pypi/tabulate/0.9.0/json | python -m json.tool | tee tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 2.791
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -L https://pypi.org/pypi/tabulate/0.9.0/json | python -m json.tool | tee tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.124,
+  "output": "{\n    \u001b[1m\"info\"\u001b[0m: {\n        \u001b[1m\"author\"\u001b[0m: \u001b[32m\"\"\u001b[0m,\n        \u001b[1m\"author_email\"\u001b[0m: \u001b[32m\"Sergey Astanin <s.astanin@gmail.com>\"\u001b[0m,\n        \u001b[1m\"bugtrack_url\"\u001b[0m: \u001b[1;34mnull\u001b[0m,\n        \u001b[1m\"classifiers\"\u001b[0m: [\n            \u001b[32m\"Development Status :: 4 - Beta\"\u001b[0m,\n            \u001b[32m\"License :: OSI Approved :: MIT License\"\u001b[0m,\n            \u001b[32m\"Operating System :: OS Independent\"\u001b[0m,\n            \u001b[32m\"Programming Language :: Python :: 3\"\u001b[0m,\n            \u001b[32m\"Programming Language :: Python :: 3.10\"\u001b[0m,\n            \u001b[32m\"Programming Language :: Python :: 3.7\"\u001b[0m,\n            \u001b[32m\"Programming Language :: Python :: 3.8\"\u001b[0m,\n            \u001b[32m\"Programming Language :: Python :: 3.9\"\u001b[0m,\n            \u001b[32m\"Topic :: Software Development :: Libraries\"\u001b[0m\n        ],\n        \u001b[1m\"description\"\u001b[0m: \u001b[32m\"python-tabulate\\n===============\\n\\nPretty-print tabular data in Python, a library and a command-line\\nutility.\\n\\nThe main use cases of the library are:\\n\\n-   printing small tables without hassle: just one function call,\\n    formatting is guided by the data itself\\n-   authoring tabular data for lightweight plain-text markup: multiple\\n    output formats suitable for further editing or transformation\\n-   readable presentation of mixed textual and numeric data: smart\\n    column alignment, configurable number formatting, alignment by a\\n    decimal point\\n\\nInstallation\\n------------\\n\\nTo install the Python library and the command line utility, run:\\n\\n```shell\\\n...[41211 chars truncated]...\n\u001b[0m: \u001b[32m\"0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c\"\u001b[0m\n            },\n            \u001b[1m\"downloads\"\u001b[0m: \u001b[33m-1\u001b[0m,\n            \u001b[1m\"filename\"\u001b[0m: \u001b[32m\"tabulate-0.9.0.tar.gz\"\u001b[0m,\n            \u001b[1m\"has_sig\"\u001b[0m: \u001b[1;34mfalse\u001b[0m,\n            \u001b[1m\"md5_digest\"\u001b[0m: \u001b[32m\"3b10bb64f8a06ca7549d3481b7e6c028\"\u001b[0m,\n            \u001b[1m\"packagetype\"\u001b[0m: \u001b[32m\"sdist\"\u001b[0m,\n            \u001b[1m\"python_version\"\u001b[0m: \u001b[32m\"source\"\u001b[0m,\n            \u001b[1m\"requires_python\"\u001b[0m: \u001b[32m\">=3.7\"\u001b[0m,\n            \u001b[1m\"size\"\u001b[0m: \u001b[33m81090\u001b[0m,\n            \u001b[1m\"upload_time\"\u001b[0m: \u001b[32m\"2022-10-06T17:21:48\"\u001b[0m,\n            \u001b[1m\"upload_time_iso_8601\"\u001b[0m: \u001b[32m\"2022-10-06T17:21:48.540327Z\"\u001b[0m,\n            \u001b[1m\"url\"\u001b[0m: \u001b[32m\"https://files.pythonhosted.org/packages/ec/fe/802052aecb21e3797b8f7902564ab6ea0d60ff8ca23952079064155d1ae1/tabulate-0.9.0.tar.gz\"\u001b[0m,\n            \u001b[1m\"yanked\"\u001b[0m: \u001b[1;34mfalse\u001b[0m,\n            \u001b[1m\"yanked_reason\"\u001b[0m: \u001b[1;34mnull\u001b[0m\n        }\n    ],\n    \u001b[1m\"vulnerabilities\"\u001b[0m: []\n}\n\n[stderr]\n  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current\n                                 Dload  Upload  Total   Spent   Left   Speed\n\n  0      0   0      0   0      0      0      0                              0\n100  37684 100  37684   0      0 710.4k      0                              0\n100  37684 100  37684   0      0 709.6k      0                              0\n100  37684 100  37684   0      0 708.8k      0                              0\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 8.673
+ }
+]

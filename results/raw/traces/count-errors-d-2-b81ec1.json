@@ -1,0 +1,62 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_gct9q8ej",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "grep -c 'ERROR' app.log"
+     }
+    }
+   }
+  ],
+  "model_s": 2.009
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "grep -c 'ERROR' app.log",
+  "exit_code": 0,
+  "tool_s": 0.064,
+  "output": "83\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The file `app.log` contains 83 lines with the word ERROR. I will now write this number to `count.txt`.\n",
+  "tool_calls": [
+   {
+    "id": "call_m7pq6tni",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "content": "83",
+      "path": "count.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 1.479
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "mkdir -p \"$(dirname count.txt)\" && echo ODM= | base64 -d > count.txt && echo wrote count.txt",
+  "exit_code": 0,
+  "tool_s": 0.061,
+  "output": "wrote count.txt\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.234
+ }
+]

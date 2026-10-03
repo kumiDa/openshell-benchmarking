@@ -1,0 +1,62 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_xrrzw65l",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello"
+     }
+    }
+   }
+  ],
+  "model_s": 2.507
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello",
+  "exit_code": 0,
+  "tool_s": 1.128,
+  "output": "\n[stderr]\nCloning into 'hello'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The git repository has been cloned into the `hello` directory inside the working directory. The command executed successfully.\n\nmkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello\n",
+  "tool_calls": [
+   {
+    "id": "call_j40060ru",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "path": "hello/README.md",
+      "content": "# Welcome to the Hello-World repository\n\nThis is a simple repository to demonstrate how to clone a GitHub repository."
+     }
+    }
+   }
+  ],
+  "model_s": 2.527
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "mkdir -p \"$(dirname hello/README.md)\" && echo IyBXZWxjb21lIHRvIHRoZSBIZWxsby1Xb3JsZCByZXBvc2l0b3J5CgpUaGlzIGlzIGEgc2ltcGxlIHJlcG9zaXRvcnkgdG8gZGVtb25zdHJhdGUgaG93IHRvIGNsb25lIGEgR2l0SHViIHJlcG9zaXRvcnku | base64 -d > hello/README.md && echo wrote hello/README.md",
+  "exit_code": 0,
+  "tool_s": 0.01,
+  "output": "wrote hello/README.md\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.246
+ }
+]

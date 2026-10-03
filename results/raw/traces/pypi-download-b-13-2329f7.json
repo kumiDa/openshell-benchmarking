@@ -1,0 +1,108 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_hvep06qz",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json"
+     }
+    }
+   },
+   {
+    "id": "call_f1ma6k3c",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l tabulate.json"
+     }
+    }
+   },
+   {
+    "id": "call_au1bfvlc",
+    "function": {
+     "index": 2,
+     "name": "write_file",
+     "arguments": {
+      "content": "",
+      "path": "tabulate.json"
+     }
+    }
+   },
+   {
+    "id": "call_nvlcfgye",
+    "function": {
+     "index": 3,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -s https://pypi.org/pypi/tabulate/0.9.0/json > tabulate.json"
+     }
+    }
+   },
+   {
+    "id": "call_m5tds7m4",
+    "function": {
+     "index": 4,
+     "name": "bash",
+     "arguments": {
+      "command": "cat tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 6.124
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json https://pypi.org/pypi/tabulate/0.9.0/json",
+  "exit_code": 0,
+  "tool_s": 0.114,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100 37684  100 37684    0     0   638k      0 --:--:-- --:--:-- --:--:--  645k\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.05,
+  "output": "-rw-r--r-- 1 ubuntu ubuntu 37684 Oct  3 05:53 tabulate.json\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname tabulate.json)\" && echo  | base64 -d > tabulate.json && echo wrote tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.05,
+  "output": "wrote tabulate.json\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -s https://pypi.org/pypi/tabulate/0.9.0/json > tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.109,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "cat tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.047,
+  "output": "{\"info\":{\"author\":\"\",\"author_email\":\"Sergey Astanin <s.astanin@gmail.com>\",\"bugtrack_url\":null,\"classifiers\":[\"Development Status :: 4 - Beta\",\"License :: OSI Approved :: MIT License\",\"Operating System :: OS Independent\",\"Programming Language :: Python :: 3\",\"Programming Language :: Python :: 3.10\",\"Programming Language :: Python :: 3.7\",\"Programming Language :: Python :: 3.8\",\"Programming Language :: Python :: 3.9\",\"Topic :: Software Development :: Libraries\"],\"description\":\"python-tabulate\\n===============\\n\\nPretty-print tabular data in Python, a library and a command-line\\nutility.\\n\\nThe main use cases of the library are:\\n\\n-   printing small tables without hassle: just one function call,\\n    formatting is guided by the data itself\\n-   authoring tabular data for lightweight plain-text markup: multiple\\n    output formats suitable for further editing or transformation\\n-   readable presentation of mixed textual and numeric data: smart\\n    column alignment, configurable number formatting, alignment by a\\n    decimal point\\n\\nInstallation\\n------------\\n\\nTo install the Python library and the command line utility, run:\\n\\n```shell\\npip install tabulate\\n```\\n\\nThe command line utility will be installed as `tabulate` to `bin` on\\nLinux (e.g. `/usr/bin`); or as `tabulate.exe` to `Scripts` in your\\nPython installation on Windows (e.g. `C:\\\\Python39\\\\Scripts\\\\tabulate.exe`).\\n\\nYou may consider installing the library only for the current user:\\n\\n```shell\\npip install tabul\n...[32479 chars truncated]...\n802aade2612091b45951f265af29174f90c3236f68cc8ccdeb646941e62969\"},\"digests\":{\"blake2b_256\":\"40444a5f08c96eb108af5cb50b41f76142f0afa346dfa99d5296fe7202a11854\",\"md5\":\"b1ddaf6d315cebf520844bbc6ae7f3f5\",\"sha256\":\"024ca478df22e9340661486f85298cff5f6dcdba14f3813e8830015b9ed1948f\"},\"downloads\":-1,\"filename\":\"tabulate-0.9.0-py3-none-any.whl\",\"has_sig\":false,\"md5_digest\":\"b1ddaf6d315cebf520844bbc6ae7f3f5\",\"packagetype\":\"bdist_wheel\",\"python_version\":\"py3\",\"requires_python\":\">=3.7\",\"size\":35252,\"upload_time\":\"2022-10-06T17:21:44\",\"upload_time_iso_8601\":\"2022-10-06T17:21:44.262497Z\",\"url\":\"https://files.pythonhosted.org/packages/40/44/4a5f08c96eb108af5cb50b41f76142f0afa346dfa99d5296fe7202a11854/tabulate-0.9.0-py3-none-any.whl\",\"yanked\":false,\"yanked_reason\":null},{\"comment_text\":\"\",\"core-metadata\":false,\"digests\":{\"blake2b_256\":\"ecfe802052aecb21e3797b8f7902564ab6ea0d60ff8ca23952079064155d1ae1\",\"md5\":\"3b10bb64f8a06ca7549d3481b7e6c028\",\"sha256\":\"0095b12bf5966de529c0feb1fa08671671b3368eec77d7ef7ab114be2c068b3c\"},\"downloads\":-1,\"filename\":\"tabulate-0.9.0.tar.gz\",\"has_sig\":false,\"md5_digest\":\"3b10bb64f8a06ca7549d3481b7e6c028\",\"packagetype\":\"sdist\",\"python_version\":\"source\",\"requires_python\":\">=3.7\",\"size\":81090,\"upload_time\":\"2022-10-06T17:21:48\",\"upload_time_iso_8601\":\"2022-10-06T17:21:48.540327Z\",\"url\":\"https://files.pythonhosted.org/packages/ec/fe/802052aecb21e3797b8f7902564ab6ea0d60ff8ca23952079064155d1ae1/tabulate-0.9.0.tar.gz\",\"yanked\":false,\"yanked_reason\":null}],\"vulnerabilities\":[]}\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 8.034
+ }
+]

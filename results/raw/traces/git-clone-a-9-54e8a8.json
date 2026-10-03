@@ -1,0 +1,61 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_g0sdcgir",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello"
+     }
+    }
+   }
+  ],
+  "model_s": 2.993
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p hello && git clone https://github.com/octocat/Hello-World.git hello",
+  "exit_code": 0,
+  "tool_s": 1.168,
+  "output": "\n[stderr]\nCloning into 'hello'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The git repository has been cloned into the `hello` directory inside your working directory. The command to clone the repository was successful. Now, let's verify that the `hello` directory contains the repository files.\n",
+  "tool_calls": [
+   {
+    "id": "call_c7d0chqd",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "ls hello"
+     }
+    }
+   }
+  ],
+  "model_s": 1.749
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "ls hello",
+  "exit_code": 0,
+  "tool_s": 0.005,
+  "output": "README\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.213
+ }
+]

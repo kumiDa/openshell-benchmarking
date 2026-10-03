@@ -1,0 +1,53 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_0okpi7qc",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "curl -o tabulate.json -L https://pypi.org/pypi/tabulate/json"
+     }
+    }
+   },
+   {
+    "id": "call_402rwjdy",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls -l tabulate.json"
+     }
+    }
+   }
+  ],
+  "model_s": 2.25
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "curl -o tabulate.json -L https://pypi.org/pypi/tabulate/json",
+  "exit_code": 0,
+  "tool_s": 0.154,
+  "output": "\n[stderr]\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\n100 74120  100 74120    0     0   851k      0 --:--:-- --:--:-- --:--:--  861k\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls -l tabulate.json",
+  "exit_code": 0,
+  "tool_s": 0.091,
+  "output": "-rw-r--r-- 1 ubuntu ubuntu 74120 Oct  3 05:37 tabulate.json\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 1.305
+ }
+]

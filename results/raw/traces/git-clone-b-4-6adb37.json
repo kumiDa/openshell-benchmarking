@@ -1,0 +1,61 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_war7gkhe",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "mkdir hello && cd hello && git clone https://github.com/octocat/Hello-World.git ."
+     }
+    }
+   }
+  ],
+  "model_s": 1.146
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir hello && cd hello && git clone https://github.com/octocat/Hello-World.git .",
+  "exit_code": 0,
+  "tool_s": 1.047,
+  "output": "\n[stderr]\nCloning into '.'...\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "mkdir hello && cd hello && git clone https://github.com/octocat/Hello-World.git .\nMounted Hello-World in hello\n",
+  "tool_calls": [
+   {
+    "id": "call_5u04g9an",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "cd .. && rm -rf hello"
+     }
+    }
+   }
+  ],
+  "model_s": 1.596
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "cd .. && rm -rf hello",
+  "exit_code": 0,
+  "tool_s": 0.056,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.204
+ }
+]

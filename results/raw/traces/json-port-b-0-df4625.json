@@ -1,0 +1,58 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [],
+  "model_s": 2.245
+ },
+ {
+  "type": "nudge",
+  "turn": 0
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [],
+  "model_s": 1.93
+ },
+ {
+  "type": "nudge",
+  "turn": 1
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_rzckf67z",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "content": "{\r\n  \"port\": 8080,\r\n  \"other_field\": \"value\"\r\n}",
+      "path": "config.json"
+     }
+    }
+   }
+  ],
+  "model_s": 1.512
+ },
+ {
+  "type": "tool",
+  "turn": 2,
+  "command": "mkdir -p \"$(dirname config.json)\" && echo ew0KICAicG9ydCI6IDgwODAsDQogICJvdGhlcl9maWVsZCI6ICJ2YWx1ZSINCn0= | base64 -d > config.json && echo wrote config.json",
+  "exit_code": 0,
+  "tool_s": 0.051,
+  "output": "wrote config.json\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 3,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.427
+ }
+]

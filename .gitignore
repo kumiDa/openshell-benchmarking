@@ -1,0 +1,9 @@
+# Local tool environments (recreate: see README)
+.tools/
+.venv-report/
+# Scratch, renders, third-party installer copy
+.cache/
+# Per-run host workspaces (deleted after each run)
+runs/
+__pycache__/
+*.pyc

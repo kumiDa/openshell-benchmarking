@@ -1,0 +1,43 @@
+{
+ "A": {
+  "M3_exec_roundtrip_s": 1.222907,
+  "M1_cold_start_s": 1.6487780012539588,
+  "M2_teardown_s": 0.13575249977293424,
+  "M8_https_get_pypi_s": 45.849496,
+  "M7_pip_install_cold_s": 698.7441964999999,
+  "M6_git_20k_files_s": 3049.5095599999995,
+  "M10_cpu_python_s": 384.8930995
+ },
+ "B": {
+  "M3_exec_roundtrip_s": 46.3229965,
+  "M1_cold_start_s": 296.8333190001431,
+  "M2_teardown_s": 108.27114450148656,
+  "M8_https_get_pypi_s": 52.359868750000004,
+  "M12_roundtrip_with_16_running_s": 46.7190985,
+  "M7_pip_install_cold_s": 630.0274465,
+  "M6_git_20k_files_s": 3213.8978555,
+  "M10_cpu_python_s": 382.74935975
+ },
+ "C": {
+  "M3_exec_roundtrip_s": 57.0876645,
+  "M1_cold_start_s": 742.3785945029522,
+  "M2_teardown_s": 5208.076370501658,
+  "M11_policy_reload_s": 10082.720111000526,
+  "M8_https_get_pypi_s": 62.66323399999998,
+  "M12_roundtrip_with_16_running_s": 78.8571505,
+  "M7_pip_install_cold_s": 567.7840565000001,
+  "M6_git_20k_files_s": 3458.075163,
+  "M10_cpu_python_s": 395.23905025
+ },
+ "D": {
+  "M3_exec_roundtrip_s": 56.116771500000006,
+  "M1_cold_start_s": 738.814550000825,
+  "M2_teardown_s": 5211.976970000251,
+  "M11_policy_reload_s": 10083.708535999904,
+  "M8_https_get_pypi_s": 60.42913,
+  "M12_roundtrip_with_16_running_s": 81.11926650000001,
+  "M7_pip_install_cold_s": 572.224051,
+  "M6_git_20k_files_s": 3507.740208,
+  "M10_cpu_python_s": 396.54475475
+ }
+}

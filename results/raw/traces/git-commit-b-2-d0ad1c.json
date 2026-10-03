@@ -1,0 +1,98 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_eeburfr5",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "path": "notes.txt",
+      "content": "Some initial notes about the project.\nMore details will be added soon."
+     }
+    }
+   },
+   {
+    "id": "call_zcbqib63",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "git add notes.txt && git commit -m 'add notes' && git show HEAD:notes.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 2.54
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname notes.txt)\" && echo U29tZSBpbml0aWFsIG5vdGVzIGFib3V0IHRoZSBwcm9qZWN0LgpNb3JlIGRldGFpbHMgd2lsbCBiZSBhZGRlZCBzb29uLg== | base64 -d > notes.txt && echo wrote notes.txt",
+  "exit_code": 0,
+  "tool_s": 0.06,
+  "output": "wrote notes.txt\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "git add notes.txt && git commit -m 'add notes' && git show HEAD:notes.txt",
+  "exit_code": 128,
+  "tool_s": 0.06,
+  "output": "\n[stderr]\nAuthor identity unknown\n\n*** Please tell me who you are.\n\nRun\n\n  git config --global user.email \"you@example.com\"\n  git config --global user.name \"Your Name\"\n\nto set your account's default identity.\nOmit --global to set the identity only in this repository.\n\nfatal: unable to auto-detect email address (got 'ubuntu@98a3e039f8e1.(none)')\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_57xvx3dl",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "git config --global user.email \"you@example.com\" && git config --global user.name \"Your Name\""
+     }
+    }
+   },
+   {
+    "id": "call_0uy48wya",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "git commit -m 'add notes' && git show HEAD:notes.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 3.135
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "git config --global user.email \"you@example.com\" && git config --global user.name \"Your Name\"",
+  "exit_code": 0,
+  "tool_s": 0.059,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "git commit -m 'add notes' && git show HEAD:notes.txt",
+  "exit_code": 0,
+  "tool_s": 0.065,
+  "output": "[master (root-commit) 08e9e82] add notes\n 1 file changed, 2 insertions(+)\n create mode 100644 notes.txt\nSome initial notes about the project.\nMore details will be added soon."
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.571
+ }
+]

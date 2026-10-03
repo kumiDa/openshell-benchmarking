@@ -1,0 +1,36 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_26xp05dt",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "path": "greeting.txt",
+      "content": "hello openshell"
+     }
+    }
+   }
+  ],
+  "model_s": 0.909
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname greeting.txt)\" && echo aGVsbG8gb3BlbnNoZWxs | base64 -d > greeting.txt && echo wrote greeting.txt",
+  "exit_code": 0,
+  "tool_s": 0.063,
+  "output": "wrote greeting.txt\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.267
+ }
+]

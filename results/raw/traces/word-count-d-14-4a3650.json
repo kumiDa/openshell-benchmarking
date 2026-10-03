@@ -1,0 +1,53 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_5lic8zlc",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "wc -w essay.txt | tee words.txt"
+     }
+    }
+   },
+   {
+    "id": "call_59zqnyy0",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "cat words.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 1.587
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "wc -w essay.txt | tee words.txt",
+  "exit_code": 0,
+  "tool_s": 0.085,
+  "output": "147 essay.txt\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "cat words.txt",
+  "exit_code": 0,
+  "tool_s": 0.065,
+  "output": "147 essay.txt\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The number of words in `essay.txt` is 147, and this number has been written to `words.txt`.\nTASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 1.066
+ }
+]

@@ -1,0 +1,97 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_thhwxjt7",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "find ./data/ -type f"
+     }
+    }
+   },
+   {
+    "id": "call_cwtrxq55",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls ./data/"
+     }
+    }
+   }
+  ],
+  "model_s": 5.025
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "find ./data/ -type f",
+  "exit_code": 0,
+  "tool_s": 0.003,
+  "output": "./data/part3/report3.csv\n./data/part3/scratch3.tmp\n./data/part2/report2.csv\n./data/part2/scratch2.tmp\n./data/part4/report4.csv\n./data/part4/scratch4.tmp\n./data/part0/report0.csv\n./data/part0/scratch0.tmp\n./data/part5/report5.csv\n./data/part5/scratch5.tmp\n./data/part1/scratch1.tmp\n./data/part1/report1.csv\n./data/keep.tmp.bak\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "ls ./data/",
+  "exit_code": 0,
+  "tool_s": 0.004,
+  "output": "keep.tmp.bak\npart0\npart1\npart2\npart3\npart4\npart5\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_pvuervw7",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "find ./data/ -type f -name '*.tmp' -print0 | xargs -0 rm"
+     }
+    }
+   },
+   {
+    "id": "call_43s4gu88",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "ls ./data/"
+     }
+    }
+   }
+  ],
+  "model_s": 2.225
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "find ./data/ -type f -name '*.tmp' -print0 | xargs -0 rm",
+  "exit_code": 0,
+  "tool_s": 0.006,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "ls ./data/",
+  "exit_code": 0,
+  "tool_s": 0.004,
+  "output": "keep.tmp.bak\npart0\npart1\npart2\npart3\npart4\npart5\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.409
+ }
+]

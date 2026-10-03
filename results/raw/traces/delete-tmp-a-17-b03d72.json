@@ -1,0 +1,53 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_lz4ygy0c",
+    "function": {
+     "index": 0,
+     "name": "bash",
+     "arguments": {
+      "command": "find data/ -type f -name '*.tmp' -delete"
+     }
+    }
+   },
+   {
+    "id": "call_7y1s5k94",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "find data/ -type f -name '*.tmp'"
+     }
+    }
+   }
+  ],
+  "model_s": 3.603
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "find data/ -type f -name '*.tmp' -delete",
+  "exit_code": 0,
+  "tool_s": 0.003,
+  "output": ""
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "find data/ -type f -name '*.tmp'",
+  "exit_code": 0,
+  "tool_s": 0.003,
+  "output": ""
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "The files matching the criteria were found and deleted. Here is the summary of the task completion:\n\nTASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.907
+ }
+]

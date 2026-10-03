@@ -1,0 +1,7 @@
+[
+ {
+  "type": "reference",
+  "exit_code": 1,
+  "output": "\n[stderr]\nError: Sandbox dependencies not available: ripgrep (rg) not found\n"
+ }
+]

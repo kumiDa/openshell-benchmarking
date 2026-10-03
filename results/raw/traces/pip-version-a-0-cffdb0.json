@@ -1,0 +1,7 @@
+[
+ {
+  "type": "reference",
+  "exit_code": 0,
+  "output": "\n[stderr]\n\u001b[33m  WARNING: The script tabulate is installed in '/home/rahul/code/labs/openshell_expt/runs/host/pip-version-a-0-cffdb0/home/.local/bin' which is not on PATH.\n  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.\u001b[0m\u001b[33m\n\u001b[0m"
+ }
+]

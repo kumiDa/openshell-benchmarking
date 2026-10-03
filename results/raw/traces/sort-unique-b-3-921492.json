@@ -1,0 +1,99 @@
+[
+ {
+  "type": "assistant",
+  "turn": 0,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_xrwq5qhg",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "content": "",
+      "path": "unique.txt"
+     }
+    }
+   },
+   {
+    "id": "call_3ajrki74",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "cat names.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 3.192
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "mkdir -p \"$(dirname unique.txt)\" && echo  | base64 -d > unique.txt && echo wrote unique.txt",
+  "exit_code": 0,
+  "tool_s": 0.063,
+  "output": "wrote unique.txt\n"
+ },
+ {
+  "type": "tool",
+  "turn": 0,
+  "command": "cat names.txt",
+  "exit_code": 0,
+  "tool_s": 0.059,
+  "output": "hal\nhal\nhal\ndee\ncyd\nhal\ncyd\nbob\nhal\neve\ncyd\nbob\nada\ngus\nhal\ncyd\nada\nbob\nada\nada\ndee\ndee\nada\nhal\nfay\nhal\ndee\ndee\neve\nhal\nada\nbob\nhal\neve\ngus\nbob\neve\nfay\ndee\neve\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 1,
+  "content": "",
+  "tool_calls": [
+   {
+    "id": "call_iva7myxd",
+    "function": {
+     "index": 0,
+     "name": "write_file",
+     "arguments": {
+      "content": "ada\nbob\ndee\neve\nbob\ndee\neve\nada\nbob\neve\nada\nbob\ndee\neve\nhal\neve\nada\nbob\ndee\neve\nada\nhal\neve\nada\nbob\ndee\neve\nhal\neve\nada\nbob\ndee\neve\nhal\neve\nada\nbob\ndee\neve\nhal\neve\nada\nbob\ndee\neve\nhal\neve\nada\nbob\ndee\neve\nhal\neve\nada\nbob\ndee\neve\n",
+      "path": "unique.txt"
+     }
+    }
+   },
+   {
+    "id": "call_rez5hcn4",
+    "function": {
+     "index": 1,
+     "name": "bash",
+     "arguments": {
+      "command": "sort -u names.txt | tee unique.txt"
+     }
+    }
+   }
+  ],
+  "model_s": 5.299
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "mkdir -p \"$(dirname unique.txt)\" && echo YWRhCmJvYgpkZWUKZXZlCmJvYgpkZWUKZXZlCmFkYQpib2IKZXZlCmFkYQpib2IKZGVlCmV2ZQpoYWwKZXZlCmFkYQpib2IKZGVlCmV2ZQphZGEKaGFsCmV2ZQphZGEKYm9iCmRlZQpldmUKaGFsCmV2ZQphZGEKYm9iCmRlZQpldmUKaGFsCmV2ZQphZGEKYm9iCmRlZQpldmUKaGFsCmV2ZQphZGEKYm9iCmRlZQpldmUKaGFsCmV2ZQphZGEKYm9iCmRlZQpldmUKaGFsCmV2ZQphZGEKYm9iCmRlZQpldmUK | base64 -d > unique.txt && echo wrote unique.txt",
+  "exit_code": 0,
+  "tool_s": 0.054,
+  "output": "wrote unique.txt\n"
+ },
+ {
+  "type": "tool",
+  "turn": 1,
+  "command": "sort -u names.txt | tee unique.txt",
+  "exit_code": 0,
+  "tool_s": 0.051,
+  "output": "ada\nbob\ncyd\ndee\neve\nfay\ngus\nhal\n"
+ },
+ {
+  "type": "assistant",
+  "turn": 2,
+  "content": "TASK_COMPLETE",
+  "tool_calls": [],
+  "model_s": 0.555
+ }
+]
