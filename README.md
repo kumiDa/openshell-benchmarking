@@ -8,6 +8,8 @@ This benchmark measures what NVIDIA OpenShell sandboxes cost and what they buy, 
 
 Repository: https://github.com/kumiDa/openshell-benchmarking
 
+Report (GitHub Pages): https://kumida.github.io/openshell-benchmarking/ (built into `docs/` by `blog/build_page.py`)
+
 Design, findings log and references: [`BENCHMARK_DESIGN.md`](BENCHMARK_DESIGN.md). Preregistered hypotheses: [`HYPOTHESES.md`](HYPOTHESES.md) (SHA-256 in `HYPOTHESES.sha256`). Blog draft: [`blog/draft.md`](blog/draft.md).
 
 ## Setups

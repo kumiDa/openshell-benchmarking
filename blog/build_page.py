@@ -131,6 +131,45 @@ def main():
         for stem, _, _ in FIGURES.values():
             shutil.copy(FIGS / mode / f"{stem}.png", d / f"{stem}.png")
     print("wrote", OUT / "index.html", f"({len(page) // 1024} KB)")
+    write_pages_site(page)
+
+
+SITE = ROOT / "docs"  # GitHub Pages source: branch main, folder /docs
+SITE_URL = "https://kumida.github.io/openshell-benchmarking/"
+DESCRIPTION = ("Four ways to give a coding agent a shell, measured on overhead, task success and nine replayed "
+               "attacks: host shell, Docker, and NVIDIA OpenShell with permissive and strict policies.")
+
+
+def write_pages_site(page):
+    """Standalone copy for GitHub Pages: the artifact viewer supplies the document skeleton, Pages doesn't."""
+    head_part, body_part = page.split('<div class="page">', 1)
+    head = f"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="{html.escape(DESCRIPTION, quote=True)}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What does a sandbox cost an AI agent? OpenShell vs a plain shell">
+<meta property="og:description" content="{html.escape(DESCRIPTION, quote=True)}">
+<meta property="og:url" content="{SITE_URL}">
+<meta property="og:image" content="{SITE_URL}figures/light/F9_attack_heatmap.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>body {{ margin: 0; }} img {{ max-width: 100%; }}</style>
+{head_part.strip()}
+</head>
+<body>
+<div class="page">{body_part}</body>
+</html>
+"""
+    SITE.mkdir(exist_ok=True)
+    (SITE / "index.html").write_text(head)
+    (SITE / ".nojekyll").write_text("")  # serve files as-is, no Jekyll processing
+    if (SITE / "figures").exists():
+        shutil.rmtree(SITE / "figures")
+    shutil.copytree(OUT / "figures", SITE / "figures")
+    print("wrote", SITE / "index.html")
 
 
 TEMPLATE = """<title>OpenShell vs Plain Shell</title>
@@ -138,7 +177,7 @@ TEMPLATE = """<title>OpenShell vs Plain Shell</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one reading column (~66ch) for prose; figures, tables and code break out wider. Surfaces
+/* Layout: one reading column (~var(--measure)) for prose; figures, tables and code break out wider. Surfaces
    match the figure backgrounds so charts sit flush on the page in both themes. */
 :root {
   --bg: #fcfcfb;          /* = figure surface (light) */
@@ -153,6 +192,8 @@ TEMPLATE = """<title>OpenShell vs Plain Shell</title>
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --show-light: block;
   --show-dark: none;
+  --measure: 38rem;   /* text column; rem so headings and body share one edge */
+  --wide: 46rem;      /* code blocks and tables */
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -166,13 +207,13 @@ TEMPLATE = """<title>OpenShell vs Plain Shell</title>
 }
 body { background: var(--bg); color: var(--fg); font: 18px/1.65 var(--font-body); }
 .page { max-width: 1000px; margin: 0 auto; padding-inline: 20px; padding-block: 48px 96px; }
-.col, .page > article > :is(p, ul, ol, h2, h3, blockquote) { max-width: 66ch; margin-inline: auto; }
-header.masthead { max-width: 66ch; margin: 0 auto 40px; display: grid; gap: 14px; }
+.col, .page > article > :is(p, ul, ol, h2, h3, blockquote) { max-width: var(--measure); margin-inline: auto; }
+header.masthead { max-width: var(--measure); margin: 0 auto 40px; display: grid; gap: 14px; }
 .kicker { font: 600 12px/1.2 var(--font-display); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 h1 { font: 800 clamp(30px, 5.2vw, 46px)/1.08 var(--font-display); font-stretch: 85%; letter-spacing: -.01em; margin: 0; text-wrap: balance; }
 .dek { font-size: 20px; color: var(--muted); margin: 0; }
 .meta { font: 13px/1.5 var(--font-mono); color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; border-top: 1px solid var(--rule); padding-top: 12px; }
-.glance { max-width: 66ch; margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;
+.glance { max-width: var(--measure); margin: 0 auto 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;
   border-block: 1px solid var(--rule); }
 .glance div { padding: 16px 14px 16px 0; min-width: 0; }
 .glance div + div { padding-left: 14px; border-left: 1px solid var(--rule); }
@@ -187,10 +228,10 @@ article strong { font-weight: 600; }
 a { color: var(--accent); text-underline-offset: 2px; }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
 code { font: .86em var(--font-mono); background: var(--panel); padding: .08em .3em; border-radius: 3px; overflow-wrap: anywhere; }
-pre { max-width: 76ch; margin: 1.4em auto; background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 16px;
+pre { max-width: var(--wide); margin: 1.4em auto; background: var(--panel); border-left: 3px solid var(--accent); padding: 14px 16px;
   overflow-x: auto; font: 13.5px/1.55 var(--font-mono); }
 pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; }
-.tablewrap { max-width: 76ch; margin: 1.4em auto; overflow-x: auto; }
+.tablewrap { max-width: var(--wide); margin: 1.4em auto; overflow-x: auto; }
 table { border-collapse: collapse; width: 100%; font: 15px/1.45 var(--font-display); font-variant-numeric: tabular-nums; }
 th { text-align: left; font-weight: 700; border-bottom: 2px solid var(--fg); padding: 8px 12px 8px 0; }
 td { border-bottom: 1px solid var(--rule); padding: 8px 12px 8px 0; vertical-align: top; }
@@ -200,14 +241,14 @@ figure.diagram { overflow-x: auto; }
 figure.diagram svg { display: block; width: 100%; min-width: 560px; height: auto; color: var(--fg); }
 .fig-light { display: var(--show-light); }
 .fig-dark { display: var(--show-dark); }
-figcaption { max-width: 66ch; margin: 8px auto 0; font: 14px/1.45 var(--font-display); color: var(--muted); }
+figcaption { max-width: var(--measure); margin: 8px auto 0; font: 14px/1.45 var(--font-display); color: var(--muted); }
 .fignum { font-weight: 700; color: var(--fg); margin-right: 4px; }
 a.cite { text-decoration: none; font-family: var(--font-mono); font-size: .82em; }
 .refs ul { list-style: none; padding: 0; font-size: 15px; line-height: 1.5; }
 .refs li { margin: .6em 0; overflow-wrap: anywhere; }
 .refid { font: 600 13px var(--font-mono); color: var(--accent); margin-right: 4px; }
 .refs li:target { background: var(--accent-soft); }
-footer { max-width: 66ch; margin: 56px auto 0; border-top: 1px solid var(--rule); padding-top: 14px;
+footer { max-width: var(--measure); margin: 56px auto 0; border-top: 1px solid var(--rule); padding-top: 14px;
   font: 13px/1.5 var(--font-display); color: var(--muted); }
 @media (max-width: 560px) {
   body { font-size: 17px; }
