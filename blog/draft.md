@@ -43,7 +43,7 @@ One finding came before any measurement. **OpenShell cannot be switched off.** I
 - **Under load, the gap grows.** With 16 sandboxes running, Docker's round trip stays at 46.7 ms; OpenShell's rises to **79–81 ms**.
 - **Lifecycle.** Starting a sandbox takes **0.74 s** (Docker: 0.30 s). Deleting one takes **5.2 s** (Docker: 0.11 s). That's fine for long agent sessions and noticeable for one sandbox per short task.
 - **Policy changes.** A network-policy update on a running sandbox took **10.1 s** to take effect, every time, in every session. If your agent waits on a human to widen a policy, that's ten seconds per round.
-- **Inside the sandbox,** CPU work runs within about 3% of Docker. git over 20k files is 8–9% slower and HTTPS requests 8–10 ms slower. Checking requests at the HTTP level (strict policy) cost nothing measurable compared with uninspected traffic (permissive policy).
+- **Inside the sandbox,** CPU work runs within 4% of Docker. git over 20k files is 8–9% slower and HTTPS requests 8–10 ms slower. Checking requests at the HTTP level (strict policy) cost nothing measurable compared with uninspected traffic (permissive policy).
 
 ## 5. Result 2: does the agent still get its work done?
 

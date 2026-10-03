@@ -51,12 +51,23 @@ def load_jsonl(pattern):
 
 
 def micro():
-    per_arm = {}
+    """Per arm and metric: median of the session medians (and of the session p95s), matching the text.
+    Every results/micro file that contains a metric counts as one session for it; ECDF samples are pooled."""
+    sessions = {}
     for f in sorted(glob.glob(str(ROOT / "results" / "micro" / "*.json"))):
         d = json.load(open(f))
         for k, v in d["metrics"].items():
-            if not k.startswith("M5_fio"):
-                per_arm.setdefault(d["arm"], {})[k] = v
+            if not k.startswith("M5_fio") and v.get("n"):
+                sessions.setdefault(d["arm"], {}).setdefault(k, []).append(v)
+    per_arm = {}
+    for arm, metrics in sessions.items():
+        for k, vs in metrics.items():
+            per_arm.setdefault(arm, {})[k] = {
+                "n": sum(v["n"] for v in vs), "sessions": len(vs),
+                "median": float(np.median([v["median"] for v in vs])),
+                "p95": float(np.median([v["p95"] for v in vs])),
+                "samples": [x for v in vs for x in v.get("samples", [])],
+            }
     return per_arm
 
 
@@ -132,7 +143,7 @@ def f3_roundtrip(m, t, mode):
         ax.set_xlabel(lab)
         ax.margins(x=0.25)
     title(fig, t, "What each layer costs per command and per sandbox",
-          "Median (bar) and p95 (whisker), 20+ reps. Separate scales per panel.")
+          "Median of 3 session medians (bar) and of session p95s (whisker). Separate scales per panel.")
     save(fig, "F3_lifecycle_costs", mode)
 
 
@@ -154,7 +165,7 @@ def f4_ecdf(m, t, mode):
         txt.set_color(t["text"])
     ax.set_xlabel("Round trip for `true`, host → environment → host (ms, log scale)")
     ax.set_ylabel("Share of commands")
-    title(fig, t, "Every agent command pays the round trip", "Empirical CDF of M3.")
+    title(fig, t, "Every agent command pays the round trip", "Empirical CDF of M3, samples pooled across 3 sessions.")
     save(fig, "F4_roundtrip_ecdf", mode)
 
 
@@ -183,7 +194,7 @@ def f5_workload_ratio(m, t, mode):
     for txt in leg.get_texts():
         txt.set_color(t["text"])
     title(fig, t, "Workload time inside OpenShell, relative to plain Docker",
-          "Same image and kernel. Median of 20 reps, one session; repeat sessions pending.")
+          "Same image and kernel. Median of session medians, 3+ sessions of 20 reps.")
     save(fig, "F5_workload_relative", mode)
 
 

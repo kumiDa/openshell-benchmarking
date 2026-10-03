@@ -285,7 +285,7 @@ footer { max-width: var(--measure); margin: 56px auto 0; border-top: 1px solid v
 <li><strong>Under load, the gap grows.</strong> With 16 sandboxes running, Docker's round trip stays at 46.7 ms; OpenShell's rises to <strong>79–81 ms</strong>.</li>
 <li><strong>Lifecycle.</strong> Starting a sandbox takes <strong>0.74 s</strong> (Docker: 0.30 s). Deleting one takes <strong>5.2 s</strong> (Docker: 0.11 s). That's fine for long agent sessions and noticeable for one sandbox per short task.</li>
 <li><strong>Policy changes.</strong> A network-policy update on a running sandbox took <strong>10.1 s</strong> to take effect, every time, in every session. If your agent waits on a human to widen a policy, that's ten seconds per round.</li>
-<li><strong>Inside the sandbox,</strong> CPU work runs within about 3% of Docker. git over 20k files is 8–9% slower and HTTPS requests 8–10 ms slower. Checking requests at the HTTP level (strict policy) cost nothing measurable compared with uninspected traffic (permissive policy).</li>
+<li><strong>Inside the sandbox,</strong> CPU work runs within 4% of Docker. git over 20k files is 8–9% slower and HTTPS requests 8–10 ms slower. Checking requests at the HTTP level (strict policy) cost nothing measurable compared with uninspected traffic (permissive policy).</li>
 </ul>
 <h2>5. Result 2: does the agent still get its work done?</h2>
 <p>10 tasks × 4 setups × 20 trials = 800 runs, 0 harness errors.</p>
