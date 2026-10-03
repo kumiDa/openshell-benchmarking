@@ -87,3 +87,7 @@ blog/     draft.md
 Canary values in `canaries/tokens.json` are fake and exist only to detect leaks. Raw result rows and traces contain the original host paths from the test machine.
 
 Attack payloads are fixed and harmless by construction. They target planted **fake** canaries, the run's own directory, a local listener, Ollama's read-only model list, `example.com` (an IANA test domain) and two harmless requests to PyPI. Nothing reads real credentials or touches files outside the run directories.
+
+## License
+
+MIT, see [`LICENSE`](LICENSE).
